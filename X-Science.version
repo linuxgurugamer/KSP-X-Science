@@ -1,13 +1,13 @@
 {
   "NAME": "[x] Science!",
-  "URL": "http://ksp.spacetux.net/avc/X-Science",
+  "URL": "https://raw.githubusercontent.com/linuxgurugamer/KSP-X-Science/refs/heads/master/X-Science.version",
   "DOWNLOAD": "https://github.com/linuxgurugamer/KSP-X-Science/releases",
   "CHANGE_LOG_URL": "https://raw.githubusercontent.com/linuxgurugamer/KSP-X-Science/master/ChangeLog.txt",
   "VERSION": {
     "MAJOR": 6,
     "MINOR": 0,
     "PATCH": 2,
-    "BUILD": 0
+    "BUILD": 1
   },
   "KSP_VERSION": {
     "MAJOR": 1,
@@ -18,5 +18,10 @@
     "MAJOR": 1,
     "MINOR": 12,
     "PATCH": 0
+  },
+  "KSP_VERSION_MAX": {
+    "MAJOR": 1,
+    "MINOR": 12,
+    "PATCH": 99
   }
 }

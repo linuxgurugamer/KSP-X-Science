@@ -88,3 +88,7 @@ ChangeLog
 	Thanks to github user @UltraJohn for these:
 		When an experiment is not rerunnable, such as if it requires an engineer to reset, the experiment button in the "Here and Now" window will be color coded orange to indicate this.
 		A new setting: "Simple Mode" that simply hides the bottom number on the experiment buttons and slightly increases the font size, for a cleaner look.
+
+6.0.2.1
+	Added README-2.md
+	Updated version file to pull from github for version info
