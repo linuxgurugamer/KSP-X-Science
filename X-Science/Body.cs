@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using KSP.Localization;
+using System.Linq;
 
 
 
@@ -113,14 +114,14 @@ namespace ScienceChecklist
 		private string FigureOutType( )
 		{
 			if( _isGasGiant )
-				return "Gas Giant";
+				return Localizer.Format("#LOC_xSci_1");
 			if( _isStar )
-				return "Star";
+				return Localizer.Format("#LOC_xSci_2");
 			if( _isPlanet )
-				return "Planet";
+				return Localizer.Format("#LOC_xSci_3");
 			if( _isMoon )
-				return "Moon";
-			return "Unknown";
+				return Localizer.Format("#LOC_xSci_4");
+			return Localizer.Format("#LOC_xSci_5");
 		}
 
 		public void Update(  )
@@ -148,7 +149,7 @@ namespace ScienceChecklist
 			if( HighLogic.CurrentGame != null )
 			{
 				var node = new ConfigNode( );
-				var Progress = HighLogic.CurrentGame.scenarios.Find( s => s.moduleName == "ProgressTracking" );
+				var Progress = HighLogic.CurrentGame.scenarios.Find( s => s.moduleName == Localizer.Format("#LOC_xSci_6") );
 				Progress.Save( node );
 
 				ConfigNode[] P = node.GetNodes( "Progress" );

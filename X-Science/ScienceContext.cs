@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine; // For Collider
@@ -166,7 +167,7 @@ namespace ScienceChecklist
 					var node = new ConfigNode( );
 					HighLogic.CurrentGame.flightState.Save( node );
 					if( node == null )
-						_logger.Trace( "flightState save is null" );
+						_logger.Trace( Localizer.Format("#LOC_xSci_100") );
 					else
 					{
 						// Grab the unloaded vessels
@@ -254,7 +255,7 @@ namespace ScienceChecklist
 					}
 					catch (NullReferenceException e)
 					{
-						_logger.Info(P.name + " threw NullReferenceException in " + e.TargetSite);
+						_logger.Info(P.name + Localizer.Format("#LOC_xSci_101") + e.TargetSite);
 						continue;
 					}
 					for (int y = 0; y < Modules.Count; y++)
@@ -309,10 +310,10 @@ namespace ScienceChecklist
 					_kscBiomes = UnityEngine.Object.FindObjectsOfType<Collider>( )
 						.Where( x => x.gameObject.layer == 15 )
 						.Select( x => x.gameObject.tag )
-						.Where( x => x != "Untagged" )
-						.Where( x => !x.Contains( "KSC_Runway_Light" ) )
-						.Where( x => !x.Contains( "KSC_Pad_Flag_Pole" ) )
-						.Where( x => !x.Contains( "Ladder" ) )
+						.Where( x => x != Localizer.Format("#LOC_xSci_102") )
+						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_103") ) )
+						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_104") ) )
+						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_105") ) )
 						.Select( x => Vessel.GetLandedAtString( x ) )
 						.Select( x => x.Replace( " ", "" ) )
 						.Distinct( )
@@ -341,7 +342,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 			// Quick check for things we depend on
 			if( ResearchAndDevelopment.Instance == null || PartLoader.Instance == null  )
 			{
-				_logger.Debug( "ResearchAndDevelopment and PartLoader must be instantiated." );
+				_logger.Debug( Localizer.Format("#LOC_xSci_106") );
 				return;
 			}
 
@@ -352,14 +353,14 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 
 #if false
 				Log.Info("experiment: " + experiment.experimentTitle + ", "+
-											 "requiredExperimentLevel: " +experiment.requiredExperimentLevel + ", " +
-											 "requireAtmosphere: " + experiment.requireAtmosphere + ", "+
-											 "dataScale: " +experiment.dataScale + ", "+
-											 "requireNoAtmosphere: " + experiment.requireNoAtmosphere + ", "+
-											 "situationMask: " + experiment.situationMask + ", "+
-											 "scienceCap: " + experiment.scienceCap + ", "+
-											 "experimentTitle: " + experiment.experimentTitle + ", "+
-											 "biomeMask: " + experiment.biomeMask + ", "
+											 Localizer.Format("#LOC_xSci_107") +experiment.requiredExperimentLevel + ", " +
+											 Localizer.Format("#LOC_xSci_108") + experiment.requireAtmosphere + ", "+
+											 Localizer.Format("#LOC_xSci_109") +experiment.dataScale + ", "+
+											 Localizer.Format("#LOC_xSci_110") + experiment.requireNoAtmosphere + ", "+
+											 Localizer.Format("#LOC_xSci_111") + experiment.situationMask + ", "+
+											 Localizer.Format("#LOC_xSci_112") + experiment.scienceCap + ", "+
+											 Localizer.Format("#LOC_xSci_113") + experiment.experimentTitle + ", "+
+											 Localizer.Format("#LOC_xSci_114") + experiment.biomeMask + ", "
 						);
 #endif
 
@@ -381,7 +382,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 				// OrbitalScience support - where the experiment is possible
 				if( sitMask == 0 && _experiments[ experiment ] != null )
 				{
-					var sitMaskField = _experiments[ experiment ].GetType( ).GetField( "sitMask" );
+					var sitMaskField = _experiments[ experiment ].GetType( ).GetField( Localizer.Format("#LOC_xSci_115") );
 					if( sitMaskField != null )
 					{
 						sitMask = (uint)(int)sitMaskField.GetValue( _experiments[ experiment ] );
@@ -390,7 +391,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 
 					if( biomeMask == 0 )
 					{
-						var biomeMaskField = _experiments[ experiment ].GetType( ).GetField( "bioMask" );
+						var biomeMaskField = _experiments[ experiment ].GetType( ).GetField( Localizer.Format("#LOC_xSci_116") );
 						if( biomeMaskField != null )
 						{
 							biomeMask = (uint)(int)biomeMaskField.GetValue( _experiments[ experiment ] );

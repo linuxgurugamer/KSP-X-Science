@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using UnityEngine;
 using KSP.UI.Screens;
 using ToolbarControl_NS;
@@ -141,9 +142,9 @@ namespace ScienceChecklist
                 toolbarControl.AddToAllToolbars(null, null,
                     ApplicationLauncher.AppScenes.FLIGHT,
                     MODID,
-                    "airparkButton",
-                    "AirPark/PluginData/Icon/AirPark",
-                    "AirPark/PluginData/Icon/AirPark",
+                    Localizer.Format("#LOC_xSci_282"),
+                    Localizer.Format("#LOC_xSci_283"),
+                    Localizer.Format("#LOC_xSci_283"),
                     MODNAME
                 );
                 toolbarControl.AddLeftRightClickCallbacks(LeftButtonToggle, RightButton);

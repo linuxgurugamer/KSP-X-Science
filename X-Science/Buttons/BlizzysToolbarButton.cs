@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using ScienceChecklist;
 
 #if false
@@ -62,12 +63,12 @@ namespace ScienceChecklist
 		public void Add () {
 //			_logger.Trace("Add");
 			if (!IsAvailable) {
-				_logger.Info("Blizzy's toolbar not available.");
+				_logger.Info(Localizer.Format("#LOC_xSci_250"));
 				return;
 			}
 
 			if (_button != null) {
-				_logger.Info("Button already added.");
+				_logger.Info(Localizer.Format("#LOC_xSci_251"));
 				return;
 			}
 
@@ -106,12 +107,12 @@ namespace ScienceChecklist
 		public void Remove () {
 //			_logger.Trace("Remove");
 			if (!IsAvailable) {
-				_logger.Info("Blizzy's toolbar not available.");
+				_logger.Info(Localizer.Format("#LOC_xSci_250"));
 				return;
 			}
 
 			if (_button == null) {
-				_logger.Info("Button already removed.");
+				_logger.Info(Localizer.Format("#LOC_xSci_252"));
 				return;
 			}
 

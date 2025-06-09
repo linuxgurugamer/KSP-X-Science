@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using UnityEngine;
 
 
@@ -22,7 +23,7 @@ namespace ScienceChecklist
 
 		// Constructor
 		public SettingsWindow( ScienceChecklistAddon Parent )
-			: base( "[x] Science! Settings", 240, 360 )
+			: base( Localizer.Format("#LOC_xSci_160"), 240, 360 )
 		{
 			_logger = new Logger( this );
 			_parent = Parent;
@@ -61,42 +62,42 @@ namespace ScienceChecklist
 
 			bool save = false;
 
-			var toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.SimpleMode, new GUIContent("Simple mode", "Hides the bottom number on the experiment buttons for a cleaner look."), toggleStyle);
+			var toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.SimpleMode, new GUIContent(Localizer.Format("#LOC_xSci_161"), Localizer.Format("#LOC_xSci_162")), toggleStyle);
 			if (toggle != ScienceChecklistAddon.Config.SimpleMode)
 			{
 				ScienceChecklistAddon.Config.SimpleMode = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.HideCompleteExperiments, new GUIContent( "Hide complete experiments", "Experiments considered complete will not be shown." ), toggleStyle );
+			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.HideCompleteExperiments, new GUIContent( Localizer.Format("#LOC_xSci_163"), Localizer.Format("#LOC_xSci_164") ), toggleStyle );
 			if( toggle != ScienceChecklistAddon.Config.HideCompleteExperiments )
 			{
 				ScienceChecklistAddon.Config.HideCompleteExperiments = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.CompleteWithoutRecovery, new GUIContent( "Complete without recovery", "Show experiments as completed even if they have not been recovered yet.\nYou still need to recover the science to get the points!\nJust easier to see what is left." ), toggleStyle );
+			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.CompleteWithoutRecovery, new GUIContent( Localizer.Format("#LOC_xSci_165"), Localizer.Format("#LOC_xSci_166") ), toggleStyle );
 			if( toggle != ScienceChecklistAddon.Config.CompleteWithoutRecovery )
 			{
 				ScienceChecklistAddon.Config.CompleteWithoutRecovery = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.CheckUnloadedVessels, new GUIContent("Check unloaded vessels", "Unloaded vessels will be checked for recoverable science."), toggleStyle);
+			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.CheckUnloadedVessels, new GUIContent(Localizer.Format("#LOC_xSci_167"), Localizer.Format("#LOC_xSci_168")), toggleStyle);
 			if( toggle != ScienceChecklistAddon.Config.CheckUnloadedVessels )
 			{
 				ScienceChecklistAddon.Config.CheckUnloadedVessels = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.CheckDebris, new GUIContent("Check debris", "Vessels marked as debris will be checked for recoverable science."), toggleStyle);
+			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.CheckDebris, new GUIContent(Localizer.Format("#LOC_xSci_169"), Localizer.Format("#LOC_xSci_170")), toggleStyle);
 			if (toggle != ScienceChecklistAddon.Config.CheckDebris)
 			{
 				ScienceChecklistAddon.Config.CheckDebris = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.HideMinScienceSlider, new GUIContent("Hide Min Science Slider", "Hide the minimum science slider in the Here & Now window"), toggleStyle);
+			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.HideMinScienceSlider, new GUIContent(Localizer.Format("#LOC_xSci_171"), Localizer.Format("#LOC_xSci_172")), toggleStyle);
 			if (toggle != ScienceChecklistAddon.Config.HideMinScienceSlider)
 			{
 				ScienceChecklistAddon.Config.HideMinScienceSlider = toggle;
@@ -104,28 +105,28 @@ namespace ScienceChecklist
 			}
 
 
-			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.VeryLowMinScience, new GUIContent("Low Min Science", "Minimum science slider in the Here & Now window will go fom 0.0001 to 0.1"), toggleStyle);
+			toggle = GUILayout.Toggle(ScienceChecklistAddon.Config.VeryLowMinScience, new GUIContent(Localizer.Format("#LOC_xSci_173"), Localizer.Format("#LOC_xSci_174")), toggleStyle);
 			if (toggle != ScienceChecklistAddon.Config.VeryLowMinScience)
 			{
 				ScienceChecklistAddon.Config.VeryLowMinScience = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.AllFilter, new GUIContent( "Allow all filter", "Adds a filter button showing all experiments, even on unexplored bodies using unavailable instruments.\nMight be considered cheating." ), toggleStyle );
+			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.AllFilter, new GUIContent( Localizer.Format("#LOC_xSci_175"), Localizer.Format("#LOC_xSci_176") ), toggleStyle );
 			if( toggle != ScienceChecklistAddon.Config.AllFilter )
 			{
 				ScienceChecklistAddon.Config.AllFilter = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.FilterDifficultScience, new GUIContent( "Filter difficult science", "Hide a few experiments such as flying at stars and gas giants that are almost impossible.\n Also most EVA reports before upgrading Astronaut Complex." ), toggleStyle );
+			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.FilterDifficultScience, new GUIContent( Localizer.Format("#LOC_xSci_177"), Localizer.Format("#LOC_xSci_178") ), toggleStyle );
 			if( toggle != ScienceChecklistAddon.Config.FilterDifficultScience )
 			{
 				ScienceChecklistAddon.Config.FilterDifficultScience = toggle;
 				save = true;
 			}
 
-			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.SelectedObjectWindow, new GUIContent( "Selected Object Window", "Show the Selected Object Window in the Tracking Station." ), toggleStyle );
+			toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.SelectedObjectWindow, new GUIContent( Localizer.Format("#LOC_xSci_179"), Localizer.Format("#LOC_xSci_180") ), toggleStyle );
 			if( toggle != ScienceChecklistAddon.Config.SelectedObjectWindow )
 			{
 				ScienceChecklistAddon.Config.SelectedObjectWindow = toggle;
@@ -135,7 +136,7 @@ namespace ScienceChecklist
 #if false
 			if( BlizzysToolbarButton.IsAvailable )
 			{
-				toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.UseBlizzysToolbar, new GUIContent( "Use blizzy78's toolbar", "Remove [x] Science button from stock toolbar and add to blizzy78 toolbar." ), toggleStyle );
+				toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.UseBlizzysToolbar, new GUIContent( Localizer.Format("#LOC_xSci_181"), Localizer.Format("#LOC_xSci_182") ), toggleStyle );
 				if( toggle != ScienceChecklistAddon.Config.UseBlizzysToolbar )
 				{
 					ScienceChecklistAddon.Config.UseBlizzysToolbar = toggle;
@@ -148,10 +149,10 @@ namespace ScienceChecklist
 			if( !ScienceChecklistAddon.Config.RighClickMutesMusic )
 				selected = 1;
 			int new_selected = selected;
-			GUILayout.Label( "Right click [x] icon", labelStyle );
+			GUILayout.Label( Localizer.Format("#LOC_xSci_183"), labelStyle );
 			GUIContent[] Options = {
-				new GUIContent( "Mute music", "Here & Now window gets its own icon" ),
-				new GUIContent( "Opens Here & Now window", "Here & Now icon is hidden" )
+				new GUIContent( Localizer.Format("#LOC_xSci_184"), Localizer.Format("#LOC_xSci_185") ),
+				new GUIContent( Localizer.Format("#LOC_xSci_186"), Localizer.Format("#LOC_xSci_187") )
 			};
 			new_selected = GUILayout.SelectionGrid( selected, Options, 1, selectionStyle );
 			if( new_selected != selected )
@@ -165,7 +166,7 @@ namespace ScienceChecklist
 
 			if( ScienceChecklistAddon.Config.RighClickMutesMusic )
 			{
-				toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.MusicStartsMuted, new GUIContent( "Music starts muted", "Title music is silenced upon load.  No need to right click" ), toggleStyle );
+				toggle = GUILayout.Toggle( ScienceChecklistAddon.Config.MusicStartsMuted, new GUIContent( Localizer.Format("#LOC_xSci_188"), Localizer.Format("#LOC_xSci_189") ), toggleStyle );
 				if( toggle != ScienceChecklistAddon.Config.MusicStartsMuted )
 				{
 					ScienceChecklistAddon.Config.MusicStartsMuted = toggle;
@@ -174,7 +175,7 @@ namespace ScienceChecklist
 			}
 
 			GUILayout.Space(2);
-			GUILayout.Label(new GUIContent( "Adjust UI size", "Adjusts the the UI scaling." ), labelStyle );
+			GUILayout.Label(new GUIContent( Localizer.Format("#LOC_xSci_190"), Localizer.Format("#LOC_xSci_191") ), labelStyle );
 			var slider = GUILayout.HorizontalSlider( ScienceChecklistAddon.Config.UiScale, 1, 2 );
 			if( slider != ScienceChecklistAddon.Config.UiScale )
 			{
@@ -187,7 +188,7 @@ namespace ScienceChecklist
 
 			GUILayout.EndVertical( );
 			GUILayout.Space(10);
-			GUI.Label( new Rect( 4, windowPos.height - 13, windowPos.width - 20, 12 ), "[x] Science! V" + version, versionStyle );
+			GUI.Label( new Rect( 4, windowPos.height - 13, windowPos.width - 20, 12 ), Localizer.Format("#LOC_xSci_192") + version, versionStyle );
 		}
 	}
 }

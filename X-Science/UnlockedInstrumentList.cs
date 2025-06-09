@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using KSP.Localization;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -33,12 +34,12 @@ float AstroLevel = ScenarioUpgradeableFacilities.GetFacilityLevel( SpaceCenterFa
 
 
 
-			_unlockedInstruments.Add( "crewReport", true );
-			_unlockedInstruments.Add( "evaReport", true );
+			_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_32"), true );
+			_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_7"), true );
 			if( RnDLevel >= 0.5 )
-				_unlockedInstruments.Add( "surfaceSample", true );
+				_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_33"), true );
 			else
-				_unlockedInstruments.Add( "surfaceSample", false );
+				_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_33"), false );
 		}
 
 

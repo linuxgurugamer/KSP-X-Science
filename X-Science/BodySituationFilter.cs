@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -234,7 +235,7 @@ namespace ScienceChecklist
 			{
 				if( S.Situation.ExperimentSituation == ExperimentSituations.FlyingHigh || S.Situation.ExperimentSituation == ExperimentSituations.FlyingLow )
 					return false;
-				if( S.Situation.ExperimentSituation == ExperimentSituations.InSpaceLow && S.ScienceExperiment.id == "evaReport" ) 
+				if( S.Situation.ExperimentSituation == ExperimentSituations.InSpaceLow && S.ScienceExperiment.id == Localizer.Format("#LOC_xSci_7") ) 
 					return false;
 			}
 
@@ -250,7 +251,7 @@ namespace ScienceChecklist
 			float AstroLevel = ScenarioUpgradeableFacilities.GetFacilityLevel( SpaceCenterFacility.AstronautComplex );
 			if( AstroLevel == 0f )
 			{
-				if( S.ScienceExperiment.id == "evaReport" )
+				if( S.ScienceExperiment.id == Localizer.Format("#LOC_xSci_7") )
 				{
 					if( S.Situation.Body.IsHome )
 					{

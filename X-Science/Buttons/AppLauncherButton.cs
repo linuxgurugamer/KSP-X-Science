@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using UnityEngine;
 using KSP.UI.Screens;
 
@@ -48,7 +49,7 @@ namespace ScienceChecklist
 		{
 //			_logger.Trace("Add");
 			if (_button != null) {
-				_logger.Debug("Button already added");
+				_logger.Debug(Localizer.Format("#LOC_xSci_248"));
 				return;
 			}
 
@@ -75,7 +76,7 @@ namespace ScienceChecklist
 		public void Remove () {
 //			_logger.Trace("Remove");
 			if (_button == null) {
-				_logger.Debug("Button already removed");
+				_logger.Debug(Localizer.Format("#LOC_xSci_249"));
 				return;
 			}
 

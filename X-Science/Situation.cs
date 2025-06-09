@@ -1,7 +1,9 @@
-﻿using System.Text.RegularExpressions;
+using KSP.Localization;
+using System.Text.RegularExpressions;
 
 
 
+#region NO_LOCALIZATION
 
 namespace ScienceChecklist {
 	/// <summary>
@@ -33,6 +35,7 @@ namespace ScienceChecklist {
 						: string.Format("'s {0} ({1})", _formattedSubBiome, _formattedBiome));
 		}
 
+        #endregion
 
 
 
@@ -46,11 +49,10 @@ namespace ScienceChecklist {
 
 
 
-
-		/// <summary>
-		/// Gets the CelestialBody this situation is for.
-		/// </summary>
-		public Body        Body                { get { return _body; } }
+        /// <summary>
+        /// Gets the CelestialBody this situation is for.
+        /// </summary>
+        public Body        Body                { get { return _body; } }
 		/// <summary>
 		/// Gets the ExperimentSituations this situation is for.
 		/// </summary>
@@ -87,17 +89,17 @@ namespace ScienceChecklist {
 		{
 			switch (situation) {
 				case ExperimentSituations.FlyingHigh:
-					return "flying high over";
+					return Localizer.Format("#LOC_xSci_212");
 				case ExperimentSituations.FlyingLow:
-					return "flying low over";
+					return Localizer.Format("#LOC_xSci_213");
 				case ExperimentSituations.InSpaceHigh:
-					return "in space high over";
+					return Localizer.Format("#LOC_xSci_214");
 				case ExperimentSituations.InSpaceLow:
-					return "in space near";
+					return Localizer.Format("#LOC_xSci_215");
 				case ExperimentSituations.SrfLanded:
-					return "landed at";
+					return Localizer.Format("#LOC_xSci_216");
 				case ExperimentSituations.SrfSplashed:
-					return "splashed down at";
+					return Localizer.Format("#LOC_xSci_217");
 				default:
 					return situation.ToString();
 			}

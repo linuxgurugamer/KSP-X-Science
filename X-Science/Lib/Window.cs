@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Windows.cs
  * 
  * Thunder Aerospace Corporation's library for the Kerbal Space Program, by Taranis Elsu
@@ -24,6 +24,7 @@
  * purposes. It is in no way meant to represent a real entity. Any similarity to a real entity
  * is purely coincidental.
  */
+using KSP.Localization;
 using System;
 using UnityEngine;
 using KSP.IO;
@@ -82,11 +83,11 @@ namespace ScienceChecklist
 			mouseDown = false;
 			visible = false;
 
-			var texture = TextureHelper.FromResource( "ScienceChecklist.icons.resize.png", 16, 16 );
-			resizeContent = (texture != null) ? new GUIContent(texture, "Drag to resize the window") : new GUIContent("R", "Drag to resize the window");
+			var texture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_284"), 16, 16 );
+			resizeContent = (texture != null) ? new GUIContent(texture, Localizer.Format("#LOC_xSci_285")) : new GUIContent(Localizer.Format("#LOC_xSci_286"), Localizer.Format("#LOC_xSci_285"));
 
-			var closetexture = TextureHelper.FromResource( "ScienceChecklist.icons.close.png", 16, 16 );
-			closeContent = ( closetexture != null ) ? new GUIContent( closetexture, "Close window" ) : new GUIContent( "X", "Close window" );
+			var closetexture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_130"), 16, 16 );
+			closeContent = ( closetexture != null ) ? new GUIContent( closetexture, Localizer.Format("#LOC_xSci_153") ) : new GUIContent( Localizer.Format("#LOC_xSci_154"), Localizer.Format("#LOC_xSci_153") );
 		}
 
 		public bool IsVisible()

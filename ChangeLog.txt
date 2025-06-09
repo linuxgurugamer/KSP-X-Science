@@ -92,3 +92,7 @@ ChangeLog
 6.0.2.1
 	Added README-2.md
 	Updated version file to pull from github for version info
+
+6.0.3
+	Localized mod
+	Added Changelog.cfg

@@ -1,4 +1,5 @@
-﻿using ToolbarControl_NS;
+using KSP.Localization;
+using ToolbarControl_NS;
 using UnityEngine;
 
 #if false
@@ -19,9 +20,9 @@ namespace ScienceChecklist
 
 #if false
 #if DEBUG
-            Log = new Log("XScience", Log.LEVEL.INFO);
+            Log = new Log(Localizer.Format("#LOC_xSci_75"), Log.LEVEL.INFO);
 #else
-            Log = new Log("XScience", Log.LEVEL.Error);
+            Log = new Log(Localizer.Format("#LOC_xSci_75"), Log.LEVEL.Error);
 #endif
 #endif
         }

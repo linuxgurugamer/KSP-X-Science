@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using KSP.Localization;
+using UnityEngine;
 
 
 
@@ -6,8 +7,8 @@ namespace ScienceChecklist
 {
 	sealed class Noise : MonoBehaviour
 	{
-		private static readonly Logger _logger = new Logger( "Noise" );
-		private static readonly string _file = "[x]_Science!/bubbles";
+		private static readonly Logger _logger = new Logger( Localizer.Format("#LOC_xSci_70") );
+		private static readonly string _file = Localizer.Format("#LOC_xSci_71");
 
 		private void Awake( )
 		{ }
@@ -19,7 +20,7 @@ namespace ScienceChecklist
 		{
 			if( gameObject == null )
 			{
-				_logger.Debug( "gameObject is null!" );
+				_logger.Debug( Localizer.Format("#LOC_xSci_72") );
 				return;
 			}
 
@@ -33,14 +34,14 @@ namespace ScienceChecklist
 				Clip = GameDatabase.Instance.GetAudioClip( _file );
 				if( Clip == null )
 				{
-					_logger.Debug( "No noise to play!" );
+					_logger.Debug( Localizer.Format("#LOC_xSci_73") );
 					return;
 				}
 
 				audioSource.PlayOneShot( Clip, Mathf.Clamp( GameSettings.UI_VOLUME, 0f, 1f ) );
 			}
 			else
-				_logger.Debug( "No AudioSource" );
+				_logger.Debug( Localizer.Format("#LOC_xSci_74") );
 		}
 	}
 }

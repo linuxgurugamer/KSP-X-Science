@@ -1,4 +1,5 @@
-﻿using ScienceChecklist.Lib.Adds;
+using KSP.Localization;
+using ScienceChecklist.Lib.Adds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace ScienceChecklist
         public event EventHandler OnOpenEvent;
 
         public StatusWindow(ScienceChecklistAddon Parent)
-            : base("[x] Science! Here and Now", 250, 30)
+            : base(Localizer.Format("#LOC_xSci_218"), 250, 30)
         {
             _parent = Parent;
             UiScale = ScienceChecklistAddon.Config.UiScale;
@@ -57,15 +58,15 @@ namespace ScienceChecklist
             _emptyTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
             _emptyTexture.SetPixels(new[] { Color.clear });
             _emptyTexture.Apply();
-            _progressTexture = TextureHelper.FromResource("ScienceChecklist.icons.scienceProgress.png", 13, 13);
-            _completeTexture = TextureHelper.FromResource("ScienceChecklist.icons.scienceComplete.png", 13, 13);
+            _progressTexture = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_117"), 13, 13);
+            _completeTexture = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_118"), 13, 13);
 
-            _GfxTimeWarp = TextureHelper.FromResource("ScienceChecklist.icons.time-warp.png", 13, 13);
-            _GfxTimeWarpOff = TextureHelper.FromResource("ScienceChecklist.icons.time-warp-x.png", 13, 13);
-            _GfxAudioAlert = TextureHelper.FromResource("ScienceChecklist.icons.audio-alert.png", 13, 13);
-            _GfxAudioAlertOff = TextureHelper.FromResource("ScienceChecklist.icons.audio-alert-off.png", 13, 13);
-            _GfxResultsWindow = TextureHelper.FromResource("ScienceChecklist.icons.report.png", 13, 13);
-            _GfxResultsWindowOff = TextureHelper.FromResource("ScienceChecklist.icons.report-x.png", 13, 13);
+            _GfxTimeWarp = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_219"), 13, 13);
+            _GfxTimeWarpOff = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_220"), 13, 13);
+            _GfxAudioAlert = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_221"), 13, 13);
+            _GfxAudioAlertOff = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_222"), 13, 13);
+            _GfxResultsWindow = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_223"), 13, 13);
+            _GfxResultsWindowOff = TextureHelper.FromResource(Localizer.Format("#LOC_xSci_224"), 13, 13);
 
             _availableScienceExperiments = new Dictionary<string, bool>();
 
@@ -170,7 +171,7 @@ namespace ScienceChecklist
                 GUILayout.Space(wScale(10));
                 using (new GUILayout.HorizontalScope())
                 {
-                    GUILayout.Label("Min Science", _scienceThresholdLabelStyle);
+                    GUILayout.Label(Localizer.Format("#LOC_xSci_225"), _scienceThresholdLabelStyle);
 
                     float scienceThreshold = 0f;
                     if (ScienceChecklistAddon.Config.VeryLowMinScience)
@@ -205,6 +206,7 @@ namespace ScienceChecklist
                         _filter.UpdateFilter();
                     }
 
+                    #region NO_LOCALIZATION
                     string format = "F1";
                     int width = 26;
                     if (ScienceChecklistAddon.Config.VeryLowMinScience)
@@ -222,6 +224,7 @@ namespace ScienceChecklist
                             format = "F2";
                         }
                         width = 40;
+                        #endregion
                     }
                     GUILayout.Label(ScienceChecklistAddon.Config.ScienceThreshold.ToString(format), _scienceThresholdLabelStyle, GUILayout.Width(wScale(width)));
 
@@ -260,16 +263,16 @@ namespace ScienceChecklist
                 }
             }
             else
-                _logger.Trace("DisplayExperiments is null");
+                _logger.Trace(Localizer.Format("#LOC_xSci_147"));
 
             GUILayout.Space(wScale(10));
 
             GUILayout.BeginHorizontal();
             GUIContent Content = null;
             if (ScienceChecklistAddon.Config.StopTimeWarp)
-                Content = new GUIContent(_GfxTimeWarp, "Time warp will be stopped");
+                Content = new GUIContent(_GfxTimeWarp, Localizer.Format("#LOC_xSci_226"));
             else
-                Content = new GUIContent(_GfxTimeWarpOff, "Time warp will not be stopped");
+                Content = new GUIContent(_GfxTimeWarpOff, Localizer.Format("#LOC_xSci_227"));
             if (GUILayout.Button(Content, GUILayout.Width(wScale(36)), GUILayout.Height(wScale(32))))
             {
                 ScienceChecklistAddon.Config.StopTimeWarp = !ScienceChecklistAddon.Config.StopTimeWarp;
@@ -279,9 +282,9 @@ namespace ScienceChecklist
 
 
             if (ScienceChecklistAddon.Config.PlayNoise)
-                Content = new GUIContent(_GfxAudioAlert, "Audio alert will sound");
+                Content = new GUIContent(_GfxAudioAlert, Localizer.Format("#LOC_xSci_228"));
             else
-                Content = new GUIContent(_GfxAudioAlertOff, "No audio alert");
+                Content = new GUIContent(_GfxAudioAlertOff, Localizer.Format("#LOC_xSci_229"));
             if (GUILayout.Button(Content, GUILayout.Width(wScale(36)), GUILayout.Height(wScale(32))))
             {
                 ScienceChecklistAddon.Config.PlayNoise = !ScienceChecklistAddon.Config.PlayNoise;
@@ -291,9 +294,9 @@ namespace ScienceChecklist
 
 
             if (ScienceChecklistAddon.Config.ShowResultsWindow)
-                Content = new GUIContent(_GfxResultsWindow, "Show results window");
+                Content = new GUIContent(_GfxResultsWindow, Localizer.Format("#LOC_xSci_230"));
             else
-                Content = new GUIContent(_GfxResultsWindowOff, "Suppress results window");
+                Content = new GUIContent(_GfxResultsWindowOff, Localizer.Format("#LOC_xSci_231"));
             if (GUILayout.Button(Content, GUILayout.Width(wScale(36)), GUILayout.Height(wScale(32))))
             {
                 ScienceChecklistAddon.Config.ShowResultsWindow = !ScienceChecklistAddon.Config.ShowResultsWindow;
@@ -340,35 +343,35 @@ namespace ScienceChecklist
             if (_filter.CurrentSituation != null)
             {
                 Body Body = _filter.CurrentSituation.Body;
-                Text += "Body: " + GameHelper.LocalizeBodyName(Body.CelestialBody.displayName) + "\n";
+                Text += Localizer.Format("#LOC_xSci_194") + GameHelper.LocalizeBodyName(Body.CelestialBody.displayName) + "\n";
                 Text += Body.Type;
                 if (Body.IsHome)
-                    Text += " - Home!";
+                    Text += Localizer.Format("#LOC_xSci_195");
                 Text += "\n\n";
-                Text += "Space high: " + (Body.CelestialBody.scienceValues.spaceAltitudeThreshold / 1000) + "km\n";
+                Text += Localizer.Format("#LOC_xSci_196") + (Body.CelestialBody.scienceValues.spaceAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_232");
 
                 if (Body.HasAtmosphere)
                 {
-                    Text += "Atmos depth: " + (Body.CelestialBody.atmosphereDepth / 1000) + "km\n";
-                    Text += "Flying high: " + (Body.CelestialBody.scienceValues.flyingAltitudeThreshold / 1000) + "km\n";
+                    Text += Localizer.Format("#LOC_xSci_233") + (Body.CelestialBody.atmosphereDepth / 1000) + Localizer.Format("#LOC_xSci_232");
+                    Text += Localizer.Format("#LOC_xSci_234") + (Body.CelestialBody.scienceValues.flyingAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_232");
                     if (Body.HasOxygen)
-                        Text += "Has oxygen - jets work\n";
+                        Text += Localizer.Format("#LOC_xSci_235");
                 }
                 else
-                    Text += "No kind of atmosphere\n";
+                    Text += Localizer.Format("#LOC_xSci_236");
 
                 if (Body.HasSurface)
                 {
                     if (Body.HasOcean)
-                        Text += "Has oceans\n";
+                        Text += Localizer.Format("#LOC_xSci_237");
                 }
                 else
-                    Text += "No surface\n";
+                    Text += Localizer.Format("#LOC_xSci_238");
 
                 Text += "\n";
             }
 
-            Text += "Current vessel: " + _parent.Science.CurrentVesselScience.Count() + " stored experiments";
+            Text += Localizer.Format("#LOC_xSci_239") + _parent.Science.CurrentVesselScience.Count() + Localizer.Format("#LOC_xSci_240");
 
             return Text;
         }
@@ -389,12 +392,14 @@ namespace ScienceChecklist
         {
             bool ExperimentRunnable = CanRunExperiment(exp, true);
             Rect buttonRect = new Rect(rect) { xMax = wScale(200) };
+            #region NO_LOCALIZATION
             string scienceValueString = " (" + exp.NextScienceIncome.ToString(
                 ScienceChecklistAddon.Config.VeryLowMinScience && exp.NextScienceIncome < 1 ? "F3" : "F1"
                 ) + ")";
             if(!ScienceChecklistAddon.Config.SimpleMode) scienceValueString += "\n" + (exp.CompletedScience + exp.OnboardScience).ToString("F2");
+            #endregion
             GUIContent expContent = new GUIContent(exp.ShortDescription + scienceValueString,
-                "Experiment description (next run value)" + (!ScienceChecklistAddon.Config.SimpleMode ? "\n\nRecovered+OnBoard value" : ""));
+                Localizer.Format("#LOC_xSci_241") + (!ScienceChecklistAddon.Config.SimpleMode ? Localizer.Format("#LOC_xSci_242") : ""));
 
             if (ExperimentRunnable)
             {
@@ -414,7 +419,7 @@ namespace ScienceChecklist
         }
 
 
-
+        #region NO_LOCALIZATION
         private void ProgressBar(Rect rect, float curr, float total, float curr2)
         {
             var completeTexture = _completeTexture;
@@ -460,7 +465,7 @@ namespace ScienceChecklist
                 GUI.Label(labelRect, string.Format("{0:0.##}/{1:0.##}", curr, total), _progressLabelStyle);
             }
         }
-
+        #endregion
 
 
         #region Events called when science changes
@@ -468,7 +473,7 @@ namespace ScienceChecklist
         // This is the lightest update used when the vessel changes
         public void RefreshFilter(object sender, EventArgs e)
         {
-            _logger.Info("StatusWindow.RefreshFilter");
+            _logger.Info(Localizer.Format("#LOC_xSci_243"));
 
             if (!IsVisible())
             {
@@ -540,7 +545,7 @@ namespace ScienceChecklist
                         continue;
                     }
 
-                    if (Id == "crewReport" || Id == "surfaceSample" || Id == "evaReport") // Always pop UI for Kerbal experiments
+                    if (Id == Localizer.Format("#LOC_xSci_32") || Id == Localizer.Format("#LOC_xSci_33") || Id == Localizer.Format("#LOC_xSci_7")) // Always pop UI for Kerbal experiments
                     {
                         anyRunnableExperiments = true;
                         break;
@@ -564,7 +569,7 @@ namespace ScienceChecklist
                         if (ScienceChecklistAddon.Config.PlayNoise)
                             PlayNoise();
                         if (ScienceChecklistAddon.Config.StopTimeWarp || ScienceChecklistAddon.Config.PlayNoise)
-                            ScreenMessages.PostScreenMessage("New Situation: " + _filter.CurrentSituation.Description);
+                            ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_xSci_244") + _filter.CurrentSituation.Description);
                     }
                 }
             }
@@ -645,7 +650,7 @@ namespace ScienceChecklist
 
                 if (m != null)
                 {
-                    _logger.Debug("Running DMModuleScienceAnimateGenerics Experiment " + m.experimentID + " on part " + m.part.partInfo.name);
+                    _logger.Debug(Localizer.Format("#LOC_xSci_245") + m.experimentID + Localizer.Format("#LOC_xSci_246") + m.part.partInfo.name);
                     NewDMagicInstance.gatherScienceData(m, !ScienceChecklistAddon.Config.ShowResultsWindow);
                 }
 
@@ -738,9 +743,9 @@ namespace ScienceChecklist
         {
             //_logger.Info( "BuildSettings" );
             WindowSettings W = new WindowSettings(ScienceChecklistAddon.WINDOW_NAME_STATUS);
-            W.Set("Top", (int)windowPos.yMin);
-            W.Set("Left", (int)windowPos.xMin);
-            W.Set("Visible", IsVisible());
+            W.Set(Localizer.Format("#LOC_xSci_135"), (int)windowPos.yMin);
+            W.Set(Localizer.Format("#LOC_xSci_136"), (int)windowPos.xMin);
+            W.Set(Localizer.Format("#LOC_xSci_139"), IsVisible());
 
             return W;
         }
@@ -749,14 +754,14 @@ namespace ScienceChecklist
 
         public void ApplySettings(WindowSettings W)
         {
-            windowPos.yMin = W.GetInt("Top", 40);
-            windowPos.xMin = W.GetInt("Left", 40);
+            windowPos.yMin = W.GetInt(Localizer.Format("#LOC_xSci_135"), 40);
+            windowPos.xMin = W.GetInt(Localizer.Format("#LOC_xSci_136"), 40);
             windowPos.yMax = windowPos.yMin + wScale(30);
             windowPos.xMax = windowPos.xMin + wScale(250);
 
 
             bool TempVisible = false;
-            TempVisible = W.GetBool("Visible", false);
+            TempVisible = W.GetBool(Localizer.Format("#LOC_xSci_139"), false);
             if (TempVisible)
                 OnOpenEvent(this, EventArgs.Empty);
             else

@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.IO;
 
 
@@ -14,7 +15,7 @@ namespace ScienceChecklist
 {
     internal static class CelestialBodyFilters
     {
-        private static readonly Logger _logger = new Logger("CelestialBodyFilters");
+        private static readonly Logger _logger = new Logger(Localizer.Format("#LOC_xSci_8"));
         public static ConfigNode Filters { get; set; }
         public static ConfigNode TextFilters { get; set; }
         static CelestialBodyFilters()
@@ -42,7 +43,7 @@ namespace ScienceChecklist
             }
             catch (Exception e)
             {
-                _logger.Info("Unable to load filters: " + e.ToString());
+                _logger.Info(Localizer.Format("#LOC_xSci_9") + e.ToString());
             }
         }
     }

@@ -38,6 +38,7 @@
 #3:LICENSE.md,GameData/[x]_Science!
 3:README.md,GameData/[x]_Science!
 3:ChangeLog.txt,GameData/[x]_Science!
+3:Changelog.cfg,GameData/[x]_Science!
 
 # 4:SOURCDIR, DESTDIR
 #4:Textures,GameData/ManeuverQueue/Textures

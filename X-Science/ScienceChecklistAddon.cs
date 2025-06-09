@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using UnityEngine;
 using KSP.UI.Screens;
 using ToolbarControl_NS;
@@ -79,7 +80,7 @@ namespace ScienceChecklist
             if (Config.MusicStartsMuted)
             {
                 Muted = true;
-                ScreenMessages.PostScreenMessage("[x] Science! - Music Mute");
+                ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_xSci_76"));
             }
 
             GameEvents.onGameSceneSwitchRequested.Add(this.onGameSceneSwitchRequested);
@@ -319,11 +320,11 @@ namespace ScienceChecklist
 
             if (HighLogic.CurrentGame.Mode != Game.Modes.CAREER && HighLogic.CurrentGame.Mode != Game.Modes.SCIENCE_SANDBOX)
             {
-                _logger.Info("Game type is " + HighLogic.CurrentGame.Mode + ". Deactivating.");
+                _logger.Info(Localizer.Format("#LOC_xSci_77") + HighLogic.CurrentGame.Mode + Localizer.Format("#LOC_xSci_78"));
                 _active = false;
                 return;
             }
-            _logger.Info("Game type is " + HighLogic.CurrentGame.Mode + ". Activating.");
+            _logger.Info(Localizer.Format("#LOC_xSci_77") + HighLogic.CurrentGame.Mode + Localizer.Format("#LOC_xSci_79"));
             _active = true;
             SwitchingGameScene(GameScenes.MAINMENU, HighLogic.LoadedScene); // Get correct visibility now we are active
 
@@ -428,7 +429,7 @@ namespace ScienceChecklist
             {
                 // Toggle the muted state
                 Muted = !Muted;
-                ScreenMessages.PostScreenMessage("[x] Science! - Music Mute");
+                ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_xSci_76"));
             }
             else
             {
@@ -440,7 +441,7 @@ namespace ScienceChecklist
                         _statusWindow.SetVisible(NewVisibility);
                         UpdateStatusVisibility(NewVisibility);
 
-                        _logger.Trace("ChecklistButton_RightClick, _statusWindow.IsVisible(): " + _statusWindow.IsVisible());
+                        _logger.Trace(Localizer.Format("#LOC_xSci_80") + _statusWindow.IsVisible());
                         if (_statusWindow.IsVisible())
                         {
                             if (statusToolbarControl != null)
@@ -475,7 +476,7 @@ namespace ScienceChecklist
         // It tells us when the window is opened so we can keep the button in sync
         public void OnChecklistWindowOpened(object sender, EventArgs e)
         {
-            _logger.Trace( "OnChecklistWindowOpened" );
+            _logger.Trace( Localizer.Format("#LOC_xSci_81") );
             if (checklistToolbarControl != null)
                 checklistToolbarControl.SetTrue(false);
             UpdateChecklistVisibility(true);
@@ -685,9 +686,9 @@ namespace ScienceChecklist
                 ApplicationLauncher.AppScenes.SPH |
                 ApplicationLauncher.AppScenes.TRACKSTATION,
                 MODID,
-                    "xScienceButton1",
-                    "[x]_Science!/PluginData/Icons/icon",
-                    "[x]_Science!/PluginData/Icons/icon-small",
+                    Localizer.Format("#LOC_xSci_82"),
+                    Localizer.Format("#LOC_xSci_83"),
+                    Localizer.Format("#LOC_xSci_84"),
                     MODNAME
                 );
                 checklistToolbarControl.AddLeftRightClickCallbacks(LeftButtonToggle, RightButton);
@@ -700,10 +701,10 @@ namespace ScienceChecklist
 			{
 				_checklistButton.UseBlizzyIfPossible = Config.UseBlizzysToolbar;
 
-				var texturePath = "ScienceChecklist/ChecklistSmall.png";
+				var texturePath = Localizer.Format("#LOC_xSci_85");
 				if( !GameDatabase.Instance.ExistsTexture( texturePath ) )
 				{
-					var texture = TextureHelper.FromResource( "ScienceChecklist.icons.icon-small.png", 24, 24 );
+					var texture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_86"), 24, 24 );
 					var ti = new GameDatabase.TextureInfo( null, texture, false, true, true );
 					ti.name = texturePath;
 					GameDatabase.Instance.databaseTexture.Add( ti );
@@ -712,9 +713,9 @@ namespace ScienceChecklist
 
 
 				_checklistButton.BlizzyNamespace = WINDOW_NAME_CHECKLIST;
-				_checklistButton.BlizzyButtonId = "checklist_button";
-				_checklistButton.BlizzyToolTip = "[x] Science! Checklist";
-				_checklistButton.BlizzyText = "Science Report and Checklist";
+				_checklistButton.BlizzyButtonId = Localizer.Format("#LOC_xSci_87");
+				_checklistButton.BlizzyToolTip = Localizer.Format("#LOC_xSci_88");
+				_checklistButton.BlizzyText = Localizer.Format("#LOC_xSci_89");
 				_checklistButton.BlizzyTexturePath = texturePath;
 				_checklistButton.BlizzyVisibility = new GameScenesVisibility( GameScenes.SPACECENTER, GameScenes.EDITOR, GameScenes.FLIGHT, GameScenes.TRACKSTATION );
 //				_logger.Info( "Load : Set Blizzy Stuff" );
@@ -722,7 +723,7 @@ namespace ScienceChecklist
 
 
 
-			StockTexture = TextureHelper.FromResource( "ScienceChecklist.icons.icon.png", 38, 38 );
+			StockTexture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_90"), 38, 38 );
 /*			if( StockTexture != null )
 				_logger.Info( "Load : Stock texture" );
 			else
@@ -756,10 +757,10 @@ namespace ScienceChecklist
 				{
 					_statusButton.UseBlizzyIfPossible = Config.UseBlizzysToolbar;
 
-					var texturePath = "ScienceChecklist/StatusSmall.png";
+					var texturePath = Localizer.Format("#LOC_xSci_91");
 					if( !GameDatabase.Instance.ExistsTexture( texturePath ) )
 					{
-						var texture = TextureHelper.FromResource( "ScienceChecklist.icons.icon-status-small.png", 24, 24 );
+						var texture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_92"), 24, 24 );
 						var ti = new GameDatabase.TextureInfo( null, texture, false, true, true );
 						ti.name = texturePath;
 						GameDatabase.Instance.databaseTexture.Add( ti );
@@ -768,20 +769,20 @@ namespace ScienceChecklist
 
 
 					_statusButton.BlizzyNamespace = WINDOW_NAME_CHECKLIST;
-					_statusButton.BlizzyButtonId = "status_button";
-					_statusButton.BlizzyToolTip = "[x] Science! Here & Now";
-					_statusButton.BlizzyText = "Science Status Window";
+					_statusButton.BlizzyButtonId = Localizer.Format("#LOC_xSci_93");
+					_statusButton.BlizzyToolTip = Localizer.Format("#LOC_xSci_94");
+					_statusButton.BlizzyText = Localizer.Format("#LOC_xSci_95");
 					_statusButton.BlizzyTexturePath = texturePath;
 					_statusButton.BlizzyVisibility = new GameScenesVisibility( GameScenes.FLIGHT );
 	//				_logger.Info( "Load : Set Blizzy Stuff" );
 				}
-				UnifiedButton.toolbarControl.SetTexture("[x]_Science!/PluginData/Icons/icon-status", "[x]_Science!/PluginData/Icons/icon-status-small");
+				UnifiedButton.toolbarControl.SetTexture(Localizer.Format("#LOC_xSci_96"), Localizer.Format("#LOC_xSci_97"));
 
 
 
 
 
-				StockTexture = TextureHelper.FromResource( "ScienceChecklist.icons.icon-status.png", 38, 38 );
+				StockTexture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_98"), 38, 38 );
 	/*			if( StockTexture != null )
 					_logger.Info( "Load : Stock texture" );
 				else
@@ -804,9 +805,9 @@ namespace ScienceChecklist
                     ApplicationLauncher.AppScenes.FLIGHT |
                     ApplicationLauncher.AppScenes.MAPVIEW,
                     MODID + "2",
-                    "xScienceButton2",
-                    "[x]_Science!/PluginData/Icons/icon-status",
-                    "[x]_Science!/PluginData/Icons/icon-status-small",
+                    Localizer.Format("#LOC_xSci_99"),
+                    Localizer.Format("#LOC_xSci_96"),
+                    Localizer.Format("#LOC_xSci_97"),
                     WINDOW_CHECKLIST
                     );
                 }

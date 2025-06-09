@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ namespace ScienceChecklist
 		}
 		public void Set( string Name, int Value )
 		{
-			_settings[ Name ] = Value.ToString( "D" );
+			_settings[ Name ] = Value.ToString( Localizer.Format("#LOC_xSci_247") );
 		}
 		public void Set( string Name, bool Value )
 		{
@@ -90,26 +91,26 @@ namespace ScienceChecklist
 
 		public void TestPosition( )
 		{
-			if( Exists( "Top" ) && Exists( "Left" ) )
+			if( Exists( Localizer.Format("#LOC_xSci_135") ) && Exists( Localizer.Format("#LOC_xSci_136") ) )
 			{
-				int Top = GetInt( "Top", 0 );
-				int Left = GetInt( "Left", 0 );
+				int Top = GetInt( Localizer.Format("#LOC_xSci_135"), 0 );
+				int Left = GetInt( Localizer.Format("#LOC_xSci_136"), 0 );
 
 				if( Top > ( Screen.height - 50 ) )
-					Set( "Top", Screen.height - 50 );
+					Set( Localizer.Format("#LOC_xSci_135"), Screen.height - 50 );
 				if( Left > ( Screen.width - 50 ) )
-					Set( "Left", Screen.width - 50 );
+					Set( Localizer.Format("#LOC_xSci_136"), Screen.width - 50 );
 			}
 
-			if( Exists( "CompactTop" ) && Exists( "CompactLeft" ) )
+			if( Exists( Localizer.Format("#LOC_xSci_137") ) && Exists( Localizer.Format("#LOC_xSci_138") ) )
 			{
-				int CompactTop = GetInt( "CompactTop", 0 );
-				int CompactLeft = GetInt( "CompactLeft", 0 );
+				int CompactTop = GetInt( Localizer.Format("#LOC_xSci_137"), 0 );
+				int CompactLeft = GetInt( Localizer.Format("#LOC_xSci_138"), 0 );
 
 				if( CompactTop > ( Screen.height - 50 ) )
-					Set( "CompactTop", Screen.height - 50 );
+					Set( Localizer.Format("#LOC_xSci_137"), Screen.height - 50 );
 				if( CompactLeft > ( Screen.width - 50 ) )
-					Set( "CompactLeft", Screen.width - 50 );
+					Set( Localizer.Format("#LOC_xSci_138"), Screen.width - 50 );
 			}
 		}
 	}
