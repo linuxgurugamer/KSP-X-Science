@@ -96,3 +96,6 @@ ChangeLog
 6.0.3
 	Localized mod
 	Added Changelog.cfg
+
+6.0.3.1
+	Fixed localization error where format strings were put into the localization string; the Localizer.Format can't deal with that 

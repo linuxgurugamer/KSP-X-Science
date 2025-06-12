@@ -6,6 +6,7 @@ using ClickThroughFix;
 
 using KSP.IO;
 using KSP.UI.Dialogs;
+using static ScienceChecklist.RegisterToolbar;
 
 
 namespace ScienceChecklist
@@ -430,12 +431,17 @@ namespace ScienceChecklist
 			GUILayout.Space(wScale(20));
 
 			GUILayout.BeginHorizontal( );
-			GUILayout.Label
-			(
+            GUILayout.Label
+			(				
 				new GUIContent(
-					string.Format(Localizer.Format("#LOC_xSci_144"), _filter.CompleteCount, _filter.TotalCount),
-					string.Format( Localizer.Format("#LOC_xSci_145"), _filter.TotalCount - _filter.CompleteCount, _filter.TotalScience - _filter.CompletedScience )
-				),
+					
+					string.Format("{0}/{1} " + Localizer.Format("#LOC_xSci_144"), _filter.CompleteCount, _filter.TotalCount),
+					string.Format( "{0} " + Localizer.Format("#LOC_xSci_145")+ "\n{1:0.#} mits", _filter.TotalCount - _filter.CompleteCount, _filter.TotalScience - _filter.CompletedScience )
+
+
+                //string.Format("{0}/{1} complete.", _filter.CompleteCount, _filter.TotalCount),
+                //string.Format("{0} remaining\n{1:0.#} mits", _filter.TotalCount - _filter.CompleteCount, _filter.TotalScience - _filter.CompletedScience)
+                ),
 				_experimentProgressLabelStyle,
 				GUILayout.Width(wScale(150))
 			);
