@@ -180,14 +180,8 @@ namespace ScienceChecklist
                         var crew = proto.GetVesselCrew().Count();
                         mass += res.Values.Sum(d => d.GetMass());
                         var parts = proto.protoPartSnapshots.Count();
+                        texts.Add(Localizer.Format("#LOC_xSci_205", crew, parts, string.Format("{0:f2}",mass)));
 
-                        // This is done because the Localizer.Format is unable to deal with embedded braces
-                        string formatStr = Localizer.Format("#LOC_xSci_205a") + " {0}, " +
-                                            Localizer.Format("#LOC_xSci_205b") + " {1}, " +
-                                            Localizer.Format("#LOC_xSci_205c") + " {2:f2}t";
-
-                        texts.Add(string.Format(formatStr, crew, parts, mass));
-                        //  Crew: {0}, Parts: {1}, Mass: {2:f2}t
 
 
                         switch (this.status)

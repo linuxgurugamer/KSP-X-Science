@@ -1,4 +1,4 @@
-using KSP.Localization;
+﻿using KSP.Localization;
 using System;
 using UnityEngine;
 using KSP;
@@ -434,17 +434,13 @@ namespace ScienceChecklist
 			GUILayout.Space(wScale(20));
 
 			GUILayout.BeginHorizontal( );
-            GUILayout.Label
-			(				
+			string mits = string.Format("{0:0.#}", _filter.TotalScience - _filter.CompletedScience);
+			GUILayout.Label
+			(
 				new GUIContent(
-					
-					string.Format("{0}/{1} " + Localizer.Format("#LOC_xSci_144"), _filter.CompleteCount, _filter.TotalCount),
-					string.Format( "{0} " + Localizer.Format("#LOC_xSci_145")+ "\n{1:0.#} mits", _filter.TotalCount - _filter.CompleteCount, _filter.TotalScience - _filter.CompletedScience )
-
-
-                //string.Format("{0}/{1} complete.", _filter.CompleteCount, _filter.TotalCount),
-                //string.Format("{0} remaining\n{1:0.#} mits", _filter.TotalCount - _filter.CompleteCount, _filter.TotalScience - _filter.CompletedScience)
-                ),
+					Localizer.Format("#LOC_xSci_144", _filter.CompleteCount, _filter.TotalCount),
+					Localizer.Format("#LOC_xSci_145", _filter.TotalCount - _filter.CompleteCount, mits)
+				),
 				_experimentProgressLabelStyle,
 				GUILayout.Width(wScale(150))
 			);

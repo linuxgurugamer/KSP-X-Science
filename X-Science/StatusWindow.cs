@@ -572,7 +572,7 @@ namespace ScienceChecklist
                         if (ScienceChecklistAddon.Config.PlayNoise)
                             PlayNoise();
                         if (ScienceChecklistAddon.Config.StopTimeWarp || ScienceChecklistAddon.Config.PlayNoise)
-                            ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_xSci_244") + _filter.CurrentSituation.Description);
+                            ScreenMessages.PostScreenMessage(Localizer.Format("#LOC_xSci_244", _filter.CurrentSituation.Description));
                     }
                 }
             }
