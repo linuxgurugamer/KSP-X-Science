@@ -229,6 +229,7 @@ namespace ScienceChecklist
         }
 
 
+        #region NO_LOCALIZATION
         public void CheckCommand(ProtoPartSnapshot part)
         {
             if (status == Statuses.pod)
@@ -236,12 +237,12 @@ namespace ScienceChecklist
 
             foreach (var m in part.modules)
             {
-                if (m.moduleName == Localizer.Format("#LOC_xSci_208"))
+                if (m.moduleName == "ModuleCommand")
                 {
                     status = Statuses.pod;
                     return;
                 }
-                if (m.moduleName == Localizer.Format("#LOC_xSci_209"))
+                if (m.moduleName == "KerbalSeat")
                 {
                     status = Statuses.seat;
                 }
@@ -282,10 +283,10 @@ namespace ScienceChecklist
         {
             //_logger.Info( "BuildSettings" );
             WindowSettings W = new WindowSettings(ScienceChecklistAddon.WINDOW_NAME_SHIP_STATE);
-            W.Set(Localizer.Format("#LOC_xSci_135"), (int)windowPos.yMin);
-            W.Set(Localizer.Format("#LOC_xSci_136"), (int)windowPos.xMin);
-            W.Set(Localizer.Format("#LOC_xSci_210"), (int)windowPos.width);
-            W.Set(Localizer.Format("#LOC_xSci_211"), (int)windowPos.height);
+            W.Set("Top", (int)windowPos.yMin);
+            W.Set("Left", (int)windowPos.xMin);
+            W.Set("Width", (int)windowPos.width);
+            W.Set("Height", (int)windowPos.height);
 
             return W;
         }
@@ -294,18 +295,18 @@ namespace ScienceChecklist
 
         public void ApplySettings(WindowSettings W)
         {
-            windowPos.yMin = W.GetInt(Localizer.Format("#LOC_xSci_135"), 40);
-            windowPos.xMin = W.GetInt(Localizer.Format("#LOC_xSci_136"), 40);
-            windowPos.width = W.GetInt(Localizer.Format("#LOC_xSci_210"), 200);
-            windowPos.height = W.GetInt(Localizer.Format("#LOC_xSci_211"), 200);
+            windowPos.yMin = W.GetInt("Top", 40);
+            windowPos.xMin = W.GetInt("Left", 40);
+            windowPos.width = W.GetInt("Width", 200);
+            windowPos.height = W.GetInt("Height", 200);
 
             if (windowPos.width < 100)
                 windowPos.width = 100;
 
             if (windowPos.width < 50)
                 windowPos.width = 50;
-
         }
+        #endregion
     }
 
 

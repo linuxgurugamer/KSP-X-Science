@@ -1,5 +1,4 @@
-using KSP.Localization;
-using System;
+﻿using System;
 using ScienceChecklist;
 
 #if false
@@ -8,6 +7,7 @@ namespace ScienceChecklist
 {
 	internal sealed class BlizzysToolbarButton : IToolbarButton
 	{
+		#region NO_LOCALIZATION
 		private IButton					_button;
 		private bool					_open;
 		private string					_Namespace;
@@ -63,12 +63,12 @@ namespace ScienceChecklist
 		public void Add () {
 //			_logger.Trace("Add");
 			if (!IsAvailable) {
-				_logger.Info(Localizer.Format("#LOC_xSci_250"));
+				_logger.Info("Blizzy's toolbar not available.");
 				return;
 			}
 
 			if (_button != null) {
-				_logger.Info(Localizer.Format("#LOC_xSci_251"));
+				_logger.Info("Button already added.");
 				return;
 			}
 
@@ -107,12 +107,12 @@ namespace ScienceChecklist
 		public void Remove () {
 //			_logger.Trace("Remove");
 			if (!IsAvailable) {
-				_logger.Info(Localizer.Format("#LOC_xSci_250"));
+				_logger.Info("Blizzy's toolbar not available.");
 				return;
 			}
 
 			if (_button == null) {
-				_logger.Info(Localizer.Format("#LOC_xSci_252"));
+				_logger.Info("Button already removed.");
 				return;
 			}
 
@@ -174,6 +174,7 @@ namespace ScienceChecklist
 			if( RightClick != null )
 				RightClick( this, e );
 		}
+		#endregion
 	}
 }
 #endif

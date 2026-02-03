@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (c) 2013-2016, Maik Schreiber
 All rights reserved.
 
@@ -24,7 +24,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 ﻿using System;
-using KSP.Localization;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -32,6 +31,7 @@ using UnityEngine;
 
 // TODO: Change to your plugin's namespace here.
 namespace ScienceChecklist {
+	#region NO_LOCALIZATION
 
 
 
@@ -71,7 +71,7 @@ namespace ScienceChecklist {
 		public static IToolbarManager Instance {
 			get {
 				if ((toolbarAvailable != false) && (instance_ == null)) {
-					Type type = ToolbarTypes.getType(Localizer.Format("#LOC_xSci_253"));
+					Type type = ToolbarTypes.getType("Toolbar.ToolbarManager");
 					if (type != null) {
 						object realToolbarManager = ToolbarTypes.getStaticProperty(type, "Instance").GetValue(null, null);
 						instance_ = new ToolbarManager(realToolbarManager);
@@ -417,9 +417,9 @@ namespace ScienceChecklist {
 		private PropertyInfo visibleProperty;
 
 		public GameScenesVisibility(params GameScenes[] gameScenes) {
-			Type gameScenesVisibilityType = ToolbarTypes.getType(Localizer.Format("#LOC_xSci_254"));
+			Type gameScenesVisibilityType = ToolbarTypes.getType("Toolbar.GameScenesVisibility");
 			realGameScenesVisibility = Activator.CreateInstance(gameScenesVisibilityType, new object[] { gameScenes });
-			visibleProperty = ToolbarTypes.getProperty(gameScenesVisibilityType, Localizer.Format("#LOC_xSci_139"));
+			visibleProperty = ToolbarTypes.getProperty(gameScenesVisibilityType, "Visible");
 		}
 	}
 
@@ -452,14 +452,14 @@ namespace ScienceChecklist {
 		private EventInfo onAnyOptionClickedEvent;
 
 		public PopupMenuDrawable() {
-			Type popupMenuDrawableType = ToolbarTypes.getType(Localizer.Format("#LOC_xSci_255"));
+			Type popupMenuDrawableType = ToolbarTypes.getType("Toolbar.PopupMenuDrawable");
 			realPopupMenuDrawable = Activator.CreateInstance(popupMenuDrawableType, null);
-			updateMethod = ToolbarTypes.getMethod(popupMenuDrawableType, Localizer.Format("#LOC_xSci_256"));
-			drawMethod = ToolbarTypes.getMethod(popupMenuDrawableType, Localizer.Format("#LOC_xSci_257"));
-			addOptionMethod = ToolbarTypes.getMethod(popupMenuDrawableType, Localizer.Format("#LOC_xSci_258"));
-			addSeparatorMethod = ToolbarTypes.getMethod(popupMenuDrawableType, Localizer.Format("#LOC_xSci_259"));
-			destroyMethod = ToolbarTypes.getMethod(popupMenuDrawableType, Localizer.Format("#LOC_xSci_260"));
-			onAnyOptionClickedEvent = ToolbarTypes.getEvent(popupMenuDrawableType, Localizer.Format("#LOC_xSci_261"));
+			updateMethod = ToolbarTypes.getMethod(popupMenuDrawableType, "Update");
+			drawMethod = ToolbarTypes.getMethod(popupMenuDrawableType, "Draw");
+			addOptionMethod = ToolbarTypes.getMethod(popupMenuDrawableType, "AddOption");
+			addSeparatorMethod = ToolbarTypes.getMethod(popupMenuDrawableType, "AddSeparator");
+			destroyMethod = ToolbarTypes.getMethod(popupMenuDrawableType, "Destroy");
+			onAnyOptionClickedEvent = ToolbarTypes.getEvent(popupMenuDrawableType, "OnAnyOptionClicked");
 		}
 
 		public void Update() {
@@ -511,7 +511,7 @@ namespace ScienceChecklist {
 		private ToolbarManager(object realToolbarManager) {
 			this.realToolbarManager = realToolbarManager;
 
-			addMethod = ToolbarTypes.getMethod(types.iToolbarManagerType, Localizer.Format("#LOC_xSci_262"));
+			addMethod = ToolbarTypes.getMethod(types.iToolbarManagerType, "add");
 		}
 
 		public IButton add(string ns, string id) {
@@ -533,9 +533,9 @@ namespace ScienceChecklist {
 			this.realButton = realButton;
 			this.types = types;
 
-			realClickHandler = attachEventHandler(types.button.onClickEvent, Localizer.Format("#LOC_xSci_263"), realButton);
-			realMouseEnterHandler = attachEventHandler(types.button.onMouseEnterEvent, Localizer.Format("#LOC_xSci_264"), realButton);
-			realMouseLeaveHandler = attachEventHandler(types.button.onMouseLeaveEvent, Localizer.Format("#LOC_xSci_265"), realButton);
+			realClickHandler = attachEventHandler(types.button.onClickEvent, "clicked", realButton);
+			realMouseEnterHandler = attachEventHandler(types.button.onMouseEnterEvent, "mouseEntered", realButton);
+			realMouseLeaveHandler = attachEventHandler(types.button.onMouseLeaveEvent, "mouseLeft", realButton);
 		}
 
 		private Delegate attachEventHandler(EventInfo @event, string methodName, object realButton) {
@@ -717,11 +717,11 @@ namespace ScienceChecklist {
 		internal readonly ButtonTypes button;
 
 		internal ToolbarTypes() {
-			iToolbarManagerType = getType(Localizer.Format("#LOC_xSci_266"));
-			functionVisibilityType = getType(Localizer.Format("#LOC_xSci_267"));
-			functionDrawableType = getType(Localizer.Format("#LOC_xSci_268"));
+			iToolbarManagerType = getType("Toolbar.IToolbarManager");
+			functionVisibilityType = getType("Toolbar.FunctionVisibility");
+			functionDrawableType = getType("Toolbar.FunctionDrawable");
 
-			Type iButtonType = getType(Localizer.Format("#LOC_xSci_269"));
+			Type iButtonType = getType("Toolbar.IButton");
 			button = new ButtonTypes(iButtonType);
 		}
 
@@ -772,22 +772,24 @@ namespace ScienceChecklist {
 		internal ButtonTypes(Type iButtonType) {
 			this.iButtonType = iButtonType;
 
-			textProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_270"));
-			textColorProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_271"));
-			texturePathProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_272"));
-			toolTipProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_273"));
-			visibleProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_139"));
-			visibilityProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_274"));
-			effectivelyVisibleProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_275"));
-			enabledProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_276"));
-			importantProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_277"));
-			drawableProperty = ToolbarTypes.getProperty(iButtonType, Localizer.Format("#LOC_xSci_278"));
-			onClickEvent = ToolbarTypes.getEvent(iButtonType, Localizer.Format("#LOC_xSci_279"));
-			onMouseEnterEvent = ToolbarTypes.getEvent(iButtonType, Localizer.Format("#LOC_xSci_280"));
-			onMouseLeaveEvent = ToolbarTypes.getEvent(iButtonType, Localizer.Format("#LOC_xSci_281"));
-			destroyMethod = ToolbarTypes.getMethod(iButtonType, Localizer.Format("#LOC_xSci_260"));
+			textProperty = ToolbarTypes.getProperty(iButtonType, "Text");
+			textColorProperty = ToolbarTypes.getProperty(iButtonType, "TextColor");
+			texturePathProperty = ToolbarTypes.getProperty(iButtonType, "TexturePath");
+			toolTipProperty = ToolbarTypes.getProperty(iButtonType, "ToolTip");
+			visibleProperty = ToolbarTypes.getProperty(iButtonType, "Visible");
+			visibilityProperty = ToolbarTypes.getProperty(iButtonType, "Visibility");
+			effectivelyVisibleProperty = ToolbarTypes.getProperty(iButtonType, "EffectivelyVisible");
+			enabledProperty = ToolbarTypes.getProperty(iButtonType, "Enabled");
+			importantProperty = ToolbarTypes.getProperty(iButtonType, "Important");
+			drawableProperty = ToolbarTypes.getProperty(iButtonType, "Drawable");
+			onClickEvent = ToolbarTypes.getEvent(iButtonType, "OnClick");
+			onMouseEnterEvent = ToolbarTypes.getEvent(iButtonType, "OnMouseEnter");
+			onMouseLeaveEvent = ToolbarTypes.getEvent(iButtonType, "OnMouseLeave");
+			destroyMethod = ToolbarTypes.getMethod(iButtonType, "Destroy");
 		}
 	}
+
+	#endregion
 
 	#endregion
 }

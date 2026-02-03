@@ -124,6 +124,7 @@ namespace ScienceChecklist
 			return Localizer.Format("#LOC_xSci_5");
 		}
 
+		#region NO_LOCALIZATION
 		public void Update(  )
 		{
 			// Reached - bit of a palaver but Body.DiscoveryInfo isn't useful
@@ -149,7 +150,7 @@ namespace ScienceChecklist
 			if( HighLogic.CurrentGame != null )
 			{
 				var node = new ConfigNode( );
-				var Progress = HighLogic.CurrentGame.scenarios.Find( s => s.moduleName == Localizer.Format("#LOC_xSci_6") );
+				var Progress = HighLogic.CurrentGame.scenarios.Find( s => s.moduleName == "ProgressTracking" );
 				Progress.Save( node );
 
 				ConfigNode[] P = node.GetNodes( "Progress" );
@@ -169,5 +170,6 @@ namespace ScienceChecklist
 				}
 			}
 		}
+		#endregion
 	}
 }

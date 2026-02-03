@@ -15,7 +15,8 @@ namespace ScienceChecklist
 {
     internal static class CelestialBodyFilters
     {
-        private static readonly Logger _logger = new Logger(Localizer.Format("#LOC_xSci_8"));
+        #region NO_LOCALIZATION
+        private static readonly Logger _logger = new Logger("CelestialBodyFilters");
         public static ConfigNode Filters { get; set; }
         public static ConfigNode TextFilters { get; set; }
         static CelestialBodyFilters()
@@ -43,8 +44,9 @@ namespace ScienceChecklist
             }
             catch (Exception e)
             {
-                _logger.Info(Localizer.Format("#LOC_xSci_9") + e.ToString());
+                _logger.Info("Unable to load filters:" + e.ToString());
             }
         }
+        #endregion
     }
 }

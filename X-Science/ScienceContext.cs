@@ -12,6 +12,7 @@ namespace ScienceChecklist
 {
 	public sealed class ScienceContext
 	{
+		#region NO_LOCALIZATION
 		private readonly Logger	_logger;
 		private readonly ScienceChecklistAddon _parent;
 		private Dictionary<CelestialBody, Body> _bodyList;
@@ -167,7 +168,7 @@ namespace ScienceChecklist
 					var node = new ConfigNode( );
 					HighLogic.CurrentGame.flightState.Save( node );
 					if( node == null )
-						_logger.Trace( Localizer.Format("#LOC_xSci_100") );
+						_logger.Trace("flightState save is null");
 					else
 					{
 						// Grab the unloaded vessels
@@ -255,7 +256,7 @@ namespace ScienceChecklist
 					}
 					catch (NullReferenceException e)
 					{
-						_logger.Info(P.name + Localizer.Format("#LOC_xSci_101") + e.TargetSite);
+						_logger.Info(P.name + " threw NullReferenceException in " + e.TargetSite);
 						continue;
 					}
 					for (int y = 0; y < Modules.Count; y++)
@@ -310,10 +311,10 @@ namespace ScienceChecklist
 					_kscBiomes = UnityEngine.Object.FindObjectsOfType<Collider>( )
 						.Where( x => x.gameObject.layer == 15 )
 						.Select( x => x.gameObject.tag )
-						.Where( x => x != Localizer.Format("#LOC_xSci_102") )
-						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_103") ) )
-						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_104") ) )
-						.Where( x => !x.Contains( Localizer.Format("#LOC_xSci_105") ) )
+						.Where( x => x != "Untagged" )
+						.Where( x => !x.Contains("KSC_Runway_Light") )
+						.Where( x => !x.Contains("KSC_Pad_Flag_Pole") )
+						.Where( x => !x.Contains("Ladder") )
 						.Select( x => Vessel.GetLandedAtString( x ) )
 						.Select( x => x.Replace( " ", "" ) )
 						.Distinct( )
@@ -342,7 +343,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 			// Quick check for things we depend on
 			if( ResearchAndDevelopment.Instance == null || PartLoader.Instance == null  )
 			{
-				_logger.Debug( Localizer.Format("#LOC_xSci_106") );
+				_logger.Debug("ResearchAndDevelopment and PartLoader must be instantiated.");
 				return;
 			}
 
@@ -350,19 +351,6 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 			foreach( var X in _experiments )
 			{
 				ScienceExperiment experiment = X.Key;
-
-#if false
-				Log.Info("experiment: " + experiment.experimentTitle + ", "+
-											 Localizer.Format("#LOC_xSci_107") +experiment.requiredExperimentLevel + ", " +
-											 Localizer.Format("#LOC_xSci_108") + experiment.requireAtmosphere + ", "+
-											 Localizer.Format("#LOC_xSci_109") +experiment.dataScale + ", "+
-											 Localizer.Format("#LOC_xSci_110") + experiment.requireNoAtmosphere + ", "+
-											 Localizer.Format("#LOC_xSci_111") + experiment.situationMask + ", "+
-											 Localizer.Format("#LOC_xSci_112") + experiment.scienceCap + ", "+
-											 Localizer.Format("#LOC_xSci_113") + experiment.experimentTitle + ", "+
-											 Localizer.Format("#LOC_xSci_114") + experiment.biomeMask + ", "
-						);
-#endif
 
 				_logger.Trace( experiment.experimentTitle );
 				// Where the experiment is possible
@@ -382,7 +370,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 				// OrbitalScience support - where the experiment is possible
 				if( sitMask == 0 && _experiments[ experiment ] != null )
 				{
-					var sitMaskField = _experiments[ experiment ].GetType( ).GetField( Localizer.Format("#LOC_xSci_115") );
+					var sitMaskField = _experiments[ experiment ].GetType( ).GetField("sitMask");
 					if( sitMaskField != null )
 					{
 						sitMask = (uint)(int)sitMaskField.GetValue( _experiments[ experiment ] );
@@ -391,7 +379,7 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 
 					if( biomeMask == 0 )
 					{
-						var biomeMaskField = _experiments[ experiment ].GetType( ).GetField( Localizer.Format("#LOC_xSci_116") );
+						var biomeMaskField = _experiments[ experiment ].GetType( ).GetField("bioMask");
 						if( biomeMaskField != null )
 						{
 							biomeMask = (uint)(int)biomeMaskField.GetValue( _experiments[ experiment ] );
@@ -507,5 +495,6 @@ _logger.Trace( "UpdateKscBiomes Done - " + Elapsed.ToString( ) + "ms" );*/
 //			var Elapsed = DateTime.Now - StartTime;
 //			_logger.Trace( "UpdateExperiments Done - " + Elapsed.ToString( ) + "ms" );
 		}
+		#endregion
 	}
 }

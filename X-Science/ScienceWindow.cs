@@ -80,6 +80,7 @@ namespace ScienceChecklist
 		public bool HideWhenPaused { get; set; }
 
 
+		#region NO_LOCALIZATION
 		#region Constructor
 		public ScienceWindow ( ScienceChecklistAddon Parent, SettingsWindow settingsWindow, HelpWindow helpWindow )
 		{
@@ -95,22 +96,22 @@ namespace ScienceChecklist
 			_scrollPos = new Vector2();
 			_filter = new ExperimentFilter( _parent );
 
-			_progressTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_117"), 13, 13 );
-			_completeTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_118"), 13, 13 );
-			_progressTextureCompact =				TextureHelper.FromResource( Localizer.Format("#LOC_xSci_119"), 8, 8 );
-			_completeTextureCompact =				TextureHelper.FromResource( Localizer.Format("#LOC_xSci_120"), 8, 8 );
-			_currentSituationTexture =				TextureHelper.FromResource( Localizer.Format("#LOC_xSci_121"), 25, 21 );
-			_currentVesselTexture =					TextureHelper.FromResource( Localizer.Format("#LOC_xSci_122"), 25, 21 );
-			_notCurrentVesselTexture =				TextureHelper.FromResource( Localizer.Format("#LOC_xSci_123"), 25, 21);
-			_unlockedTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_124"), 25, 21 );
-			_allTexture =							TextureHelper.FromResource( Localizer.Format("#LOC_xSci_125"), 25, 21 );
-			_searchTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_126"), 25, 21 );
-			_clearSearchTexture =					TextureHelper.FromResource( Localizer.Format("#LOC_xSci_127"), 25, 21 );
-			_minimizeTexture=						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_128"), 16, 16 );
-			_maximizeTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_129"), 16, 16 );
-			_closeTexture =							TextureHelper.FromResource( Localizer.Format("#LOC_xSci_130"), 16, 16 );
-			_helpTexture =							TextureHelper.FromResource( Localizer.Format("#LOC_xSci_131"), 16, 16 );
-			_settingsTexture =						TextureHelper.FromResource( Localizer.Format("#LOC_xSci_132"), 16, 16 );
+			_progressTexture =         TextureHelper.FromResource("ScienceChecklist.icons.scienceProgress.png", 13, 13 );
+			_completeTexture =         TextureHelper.FromResource("ScienceChecklist.icons.scienceComplete.png", 13, 13 );
+			_progressTextureCompact =  TextureHelper.FromResource("ScienceChecklist.icons.scienceProgressCompact.png", 8, 8 );
+			_completeTextureCompact =  TextureHelper.FromResource("ScienceChecklist.icons.scienceCompleteCompact.png", 8, 8 );
+			_currentSituationTexture = TextureHelper.FromResource("ScienceChecklist.icons.currentSituation.png", 25, 21 );
+			_currentVesselTexture =    TextureHelper.FromResource("ScienceChecklist.icons.currentVessel.png", 25, 21 );
+			_notCurrentVesselTexture = TextureHelper.FromResource("ScienceChecklist.icons.notCurrentVessel.png", 25, 21);
+			_unlockedTexture =         TextureHelper.FromResource("ScienceChecklist.icons.unlocked.png", 25, 21 );
+			_allTexture =              TextureHelper.FromResource("ScienceChecklist.icons.all.png", 25, 21 );
+			_searchTexture =           TextureHelper.FromResource("ScienceChecklist.icons.search.png", 25, 21 );
+			_clearSearchTexture =      TextureHelper.FromResource("ScienceChecklist.icons.clearSearch.png", 25, 21 );
+			_minimizeTexture =         TextureHelper.FromResource("ScienceChecklist.icons.minimize.png", 16, 16 );
+			_maximizeTexture =         TextureHelper.FromResource("ScienceChecklist.icons.maximize.png", 16, 16 );
+			_closeTexture =            TextureHelper.FromResource("ScienceChecklist.icons.close.png", 16, 16 );
+			_helpTexture =             TextureHelper.FromResource("ScienceChecklist.icons.help.png", 16, 16 );
+			_settingsTexture =         TextureHelper.FromResource("ScienceChecklist.icons.settings.png", 16, 16 );
 
 			_emptyTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
 			_emptyTexture.SetPixels(new[] { Color.clear });
@@ -124,10 +125,10 @@ namespace ScienceChecklist
 
 			ScienceChecklistAddon.Config.UiScaleChanged += OnUiScaleChange;
 
-			_logger.Info(Localizer.Format("#LOC_xSci_133"));
+			_logger.Info("new ScienceWindow, Added RefreshFilter");
 			HideWhenPaused = true;
 		}
-		#endregion
+		#endregion /* Constructor */
 
 
 
@@ -136,8 +137,7 @@ namespace ScienceChecklist
 		// This is the lightest update used when the vessel changes
 		public void RefreshFilter( object sender, EventArgs e )
 		{
-			//			_logger.Trace("RefreshFilter");
-			_logger.Info(Localizer.Format("#LOC_xSci_134"));
+			_logger.Info("ScienceWindow.RefreshFilter");
 
 			if (!IsVisible)
             {
@@ -166,8 +166,8 @@ namespace ScienceChecklist
 				_filter.CurrentSituation = new Situation(e._body, e._situation, e._biome, e._subBiome);
 		}
 
-
-		#endregion
+		#endregion /* Events */
+		#endregion /* NO_LOCALIZATION */
 
 
 
@@ -178,16 +178,17 @@ namespace ScienceChecklist
 		public WindowSettings BuildSettings( )
 		{
 //_logger.Info( "BuildSettings" );
+			#region NO_LOCALIZATION
 			WindowSettings W = new WindowSettings( ScienceChecklistAddon.WINDOW_NAME_CHECKLIST );
-			W.Set( Localizer.Format("#LOC_xSci_135"), (int)_rect.yMin );
-			W.Set( Localizer.Format("#LOC_xSci_136"), (int)_rect.xMin );
-			W.Set( Localizer.Format("#LOC_xSci_137"), (int)_rect3.yMin );
-			W.Set( Localizer.Format("#LOC_xSci_138"), (int)_rect3.xMin );
-			W.Set( Localizer.Format("#LOC_xSci_139"), IsVisible );
-			W.Set( Localizer.Format("#LOC_xSci_140"), _compactMode );
-			W.Set( Localizer.Format("#LOC_xSci_141"), _filter.DisplayMode.ToString( ) );
-			W.Set( Localizer.Format("#LOC_xSci_142"), _filter.Text );
-
+			W.Set("Top",  (int)_rect.yMin );
+			W.Set("Left", (int)_rect.xMin );
+			W.Set("CompactTop",  (int)_rect3.yMin );
+			W.Set("CompactLeft", (int)_rect3.xMin );
+			W.Set("Visible",    IsVisible );
+			W.Set("Compacted",  _compactMode );
+			W.Set("FilterMode", _filter.DisplayMode.ToString( ) );
+			W.Set("FilterText", _filter.Text );
+			#endregion
 			return W;
 		}
 
@@ -195,29 +196,31 @@ namespace ScienceChecklist
 
 		public void ApplySettings( WindowSettings W )
 		{
-			_rect.yMin = W.GetInt( Localizer.Format("#LOC_xSci_135"), 40 );
-			_rect.xMin = W.GetInt( Localizer.Format("#LOC_xSci_136"), 40 );
+			#region NO_LOCALIZATION
+			_rect.yMin = W.GetInt("Top",  40 );
+			_rect.xMin = W.GetInt("Left", 40 );
 			_rect.yMax = _rect.yMin + wScale( 400 );
 			_rect.xMax = _rect.xMin + wScale( 500 );
 
-			_rect3.yMin = W.GetInt( Localizer.Format("#LOC_xSci_137"), 40 );
-			_rect3.xMin = W.GetInt( Localizer.Format("#LOC_xSci_138"), 40 );
+			_rect3.yMin = W.GetInt("CompactTop",  40 );
+			_rect3.xMin = W.GetInt("CompactLeft", 40 );
 			_rect3.yMax = _rect3.yMin + wScale( 200 );
 			_rect3.xMax = _rect3.xMin + wScale( 400 );
 
-			_compactMode = W.GetBool( Localizer.Format("#LOC_xSci_140"), false );
+			_compactMode = W.GetBool("Compacted", false );
 			
-			string Temp = W.Get( Localizer.Format("#LOC_xSci_141"), DisplayMode.Unlocked.ToString( ) );
+			string Temp = W.Get("FilterMode", DisplayMode.Unlocked.ToString( ) );
 			_filter.DisplayMode = (DisplayMode)Enum.Parse( typeof( DisplayMode ), Temp, true );
 
-			_filter.Text = W.Get( Localizer.Format("#LOC_xSci_142"), "" );
+			_filter.Text = W.Get("FilterText", "" );
 
 			bool TempVisible = false;
-			TempVisible = W.GetBool( Localizer.Format("#LOC_xSci_139"), false );
+			TempVisible = W.GetBool("Visible", false );
 			if( TempVisible )
 				OnOpenEvent( this, EventArgs.Empty );
 			else
 				OnCloseEvent( this, EventArgs.Empty );
+			#endregion
 		}
 
 
@@ -465,8 +468,9 @@ namespace ScienceChecklist
 
 			_scrollPos = GUILayout.BeginScrollView(_scrollPos, _skin.scrollView);
 			var i = 0;
+			#region NO_LOCALIZATION
 			if( _filter.DisplayScienceInstances == null )
-				_logger.Trace( Localizer.Format("#LOC_xSci_147") );
+				_logger.Trace("DisplayExperiments is null");
 			else
 			{
 				for( ; i < _filter.DisplayScienceInstances.Count; i++ )
@@ -481,6 +485,7 @@ namespace ScienceChecklist
 					DrawExperiment( experiment, rect, false, _labelStyle );
 				}
 			}
+			#endregion
 
 			GUILayout.Space(wScale(20) * i);
 			GUILayout.EndScrollView();
@@ -578,6 +583,7 @@ namespace ScienceChecklist
 			GUILayout.BeginVertical();
 			_compactScrollPos = GUILayout.BeginScrollView(_compactScrollPos);
 			var i = 0;
+			#region NO_LOCALIZATION
 			if( _filter.DisplayScienceInstances != null )
 			{
 				for( ; i < _filter.DisplayScienceInstances.Count; i++ )
@@ -594,7 +600,8 @@ namespace ScienceChecklist
 				}
 			}
 			else
-				_logger.Trace( Localizer.Format("#LOC_xSci_147") );
+				_logger.Trace("DisplayExperiments is null");
+			#endregion
 			GUILayout.Space(wScale(15) * i);
 			GUILayout.EndScrollView();
 			GUILayout.EndVertical();
@@ -628,20 +635,26 @@ namespace ScienceChecklist
 
 		private void DrawTitleBarButtons( Rect rect, bool NeedMaxIcon = false )
 		{
-			var closeContent = ( _closeTexture != null ) ? new GUIContent( _closeTexture, Localizer.Format("#LOC_xSci_153") ) : new GUIContent( Localizer.Format("#LOC_xSci_154"), Localizer.Format("#LOC_xSci_153") );
+			var closeContent = ( _closeTexture == null ) ?
+				new GUIContent("X", Localizer.Format("#LOC_xSci_153")) :
+				new GUIContent(_closeTexture, Localizer.Format("#LOC_xSci_153"));
 			if (GUI.Button(wScale(new Rect(4, 4, 20, 20)), closeContent, _closeButtonStyle))
 			{
 				IsVisible = false;
 				OnCloseEvent( this, EventArgs.Empty );
 			}
 
-			var helpContent = ( _helpTexture != null ) ? new GUIContent( _helpTexture, Localizer.Format("#LOC_xSci_155") ) : new GUIContent( "?", Localizer.Format("#LOC_xSci_155") );
+			var helpContent = ( _helpTexture == null ) ?
+				new GUIContent("?", Localizer.Format("#LOC_xSci_155")):
+				new GUIContent(_helpTexture, Localizer.Format("#LOC_xSci_155"));
 			if (GUI.Button(new Rect(rect.width - wScale(72), wScale(4), wScale(20), wScale(20)), helpContent, _closeButtonStyle))
 			{
 				_helpWindow.ToggleVisible( );
 			}
 
-			var setingsContent = ( _settingsTexture != null ) ? new GUIContent( _settingsTexture, Localizer.Format("#LOC_xSci_156") ) : new GUIContent( Localizer.Format("#LOC_xSci_157"), Localizer.Format("#LOC_xSci_156") );
+			var setingsContent = ( _settingsTexture == null ) ?
+				new GUIContent("S", Localizer.Format("#LOC_xSci_156")) :
+				new GUIContent(_settingsTexture, Localizer.Format("#LOC_xSci_156"));
 			if (GUI.Button(new Rect(rect.width - wScale(48), wScale(4), wScale(20), wScale(20)), setingsContent, _closeButtonStyle))
 			{
 				_settingsWindow.ToggleVisible( );
@@ -649,9 +662,13 @@ namespace ScienceChecklist
 
 			GUIContent compactContent;
 			if( NeedMaxIcon )
-				compactContent = ( _maximizeTexture != null ) ? new GUIContent( _maximizeTexture, Localizer.Format("#LOC_xSci_158") ) : new GUIContent( Localizer.Format("#LOC_xSci_157"), Localizer.Format("#LOC_xSci_158") );
+				compactContent = ( _maximizeTexture == null ) ?
+				new GUIContent("+", Localizer.Format("#LOC_xSci_158")) :
+				new GUIContent(_maximizeTexture, Localizer.Format("#LOC_xSci_158"));
 			else
-				compactContent = ( _minimizeTexture != null ) ? new GUIContent( _minimizeTexture, Localizer.Format("#LOC_xSci_159") ) : new GUIContent( Localizer.Format("#LOC_xSci_157"), Localizer.Format("#LOC_xSci_159") );
+				compactContent = ( _minimizeTexture == null ) ?
+				new GUIContent("-", Localizer.Format("#LOC_xSci_159") ) :
+				new GUIContent(_minimizeTexture, Localizer.Format("#LOC_xSci_159") );
 			if (GUI.Button(new Rect(rect.width - wScale(24), wScale(4), wScale(20), wScale(20)), compactContent, _closeButtonStyle))
 			{
 				_compactMode = !_compactMode;

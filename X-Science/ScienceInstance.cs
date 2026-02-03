@@ -92,6 +92,22 @@ namespace ScienceChecklist {
 
         #region NO_LOCALIZATION
         /// <summary>
+        /// Special science experiment: Crew Report
+        /// </summary>
+        public bool isCrewReport { get { return ScienceExperiment.id == "crewReport"; } }
+
+        /// <summary>
+        /// Special science experiment: EVA report
+        /// </summary>
+        public bool isEvaReport { get { return ScienceExperiment.id == "evaReport"; } }
+
+        /// <summary>
+        /// Special science experiment: Surface Sample
+        /// </summary>
+        public bool isSurfaceSample { get { return ScienceExperiment.id == "surfaceSample"; } }
+
+
+		/// <summary>
         /// Gets the human-readable description of this experiment.
         /// </summary>
         public string Description {

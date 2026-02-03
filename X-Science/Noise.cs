@@ -7,8 +7,9 @@ namespace ScienceChecklist
 {
 	sealed class Noise : MonoBehaviour
 	{
-		private static readonly Logger _logger = new Logger( Localizer.Format("#LOC_xSci_70") );
-		private static readonly string _file = Localizer.Format("#LOC_xSci_71");
+		#region NO_LOCALIZATION
+		private static readonly Logger _logger = new Logger("Noise");
+		private static readonly string _file = "[x]_Science!/bubbles";
 
 		private void Awake( )
 		{ }
@@ -20,7 +21,7 @@ namespace ScienceChecklist
 		{
 			if( gameObject == null )
 			{
-				_logger.Debug( Localizer.Format("#LOC_xSci_72") );
+				_logger.Debug("gameObject is null!");
 				return;
 			}
 
@@ -34,14 +35,15 @@ namespace ScienceChecklist
 				Clip = GameDatabase.Instance.GetAudioClip( _file );
 				if( Clip == null )
 				{
-					_logger.Debug( Localizer.Format("#LOC_xSci_73") );
+					_logger.Debug("No noise to play!");
 					return;
 				}
 
 				audioSource.PlayOneShot( Clip, Mathf.Clamp( GameSettings.UI_VOLUME, 0f, 1f ) );
 			}
 			else
-				_logger.Debug( Localizer.Format("#LOC_xSci_74") );
+				_logger.Debug("No AudioSource");
 		}
+		#endregion
 	}
 }
