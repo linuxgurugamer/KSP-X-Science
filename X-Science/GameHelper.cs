@@ -60,13 +60,5 @@ namespace ScienceChecklist {
 				TimeWarp.SetRate( 0, true );
 		}
 
-        #region NO_LOCALIZATION
-        public static string LocalizeBodyName( string input )
-		{
-			return Localizer.Format("<<1>>", input);
-		}
-        #endregion
-
-
     }
 }
