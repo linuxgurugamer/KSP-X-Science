@@ -171,5 +171,36 @@ namespace ScienceChecklist
 			}
 		}
 		#endregion
+
+		public string BasicInfo( )
+		{
+			string Info = Localizer.Format("#LOC_xSci_300", CelestialBody.displayName, Type);
+			if (IsHome)
+				Info += " - " + Localizer.Format("#LOC_xSci_301");
+			return Info;
+		}
+
+		public string ScienceInfo( )
+		{
+			string Text = Localizer.Format("#LOC_xSci_302", CelestialBody.scienceValues.spaceAltitudeThreshold / 1000);
+			if (HasAtmosphere)
+			{
+				Text += Localizer.Format("#LOC_xSci_303", CelestialBody.atmosphereDepth / 1000);
+				Text += Localizer.Format("#LOC_xSci_304", CelestialBody.scienceValues.flyingAltitudeThreshold / 1000);
+				if (HasOxygen)
+					Text += Localizer.Format("#LOC_xSci_200");
+			}
+			else
+				Text += Localizer.Format("#LOC_xSci_201");
+
+			if (HasSurface)
+			{
+				if (HasOcean)
+					Text += Localizer.Format("#LOC_xSci_202");
+			}
+			else
+				Text += Localizer.Format("#LOC_xSci_203");
+			return Text;
+		}
 	}
 }

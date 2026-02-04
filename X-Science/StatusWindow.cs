@@ -342,41 +342,16 @@ namespace ScienceChecklist
         {
             string Text = "";
 
-
-
             if (_filter.CurrentSituation != null)
             {
                 Body Body = _filter.CurrentSituation.Body;
-                Text += Localizer.Format("#LOC_xSci_194") + GameHelper.LocalizeBodyName(Body.CelestialBody.displayName) + "\n";
-                Text += Body.Type;
-                if (Body.IsHome)
-                    Text += Localizer.Format("#LOC_xSci_195");
+                Text += Body.BasicInfo();
                 Text += "\n\n";
-                Text += Localizer.Format("#LOC_xSci_196") + (Body.CelestialBody.scienceValues.spaceAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_232");
-
-                if (Body.HasAtmosphere)
-                {
-                    Text += Localizer.Format("#LOC_xSci_233") + (Body.CelestialBody.atmosphereDepth / 1000) + Localizer.Format("#LOC_xSci_232");
-                    Text += Localizer.Format("#LOC_xSci_234") + (Body.CelestialBody.scienceValues.flyingAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_232");
-                    if (Body.HasOxygen)
-                        Text += Localizer.Format("#LOC_xSci_235");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_236");
-
-                if (Body.HasSurface)
-                {
-                    if (Body.HasOcean)
-                        Text += Localizer.Format("#LOC_xSci_237");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_238");
-
-                Text += "\n";
+                Text += Body.ScienceInfo();
+                Text += "\n\n";
             }
 
-            Text += Localizer.Format("#LOC_xSci_239") + _parent.Science.CurrentVesselScience.Count() + Localizer.Format("#LOC_xSci_240");
-
+            Text += Localizer.Format("#LOC_xSci_305", _parent.Science.CurrentVesselScience.Count());
             return Text;
         }
 

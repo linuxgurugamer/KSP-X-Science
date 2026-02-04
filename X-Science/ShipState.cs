@@ -95,31 +95,8 @@ namespace ScienceChecklist
             if (SelectedObject.celestialBody)
             {
                 Body Body = _parent.Science.BodyList[SelectedObject.celestialBody];
-                Title += Localizer.Format("#LOC_xSci_194") + GameHelper.LocalizeBodyName(Body.CelestialBody.displayName) + "\n";
-                Title += Body.Type;
-                if (Body.IsHome)
-                    Title += Localizer.Format("#LOC_xSci_195");
-
-
-
-                Text += Localizer.Format("#LOC_xSci_196") + (Body.CelestialBody.scienceValues.spaceAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_197");
-                if (Body.HasAtmosphere)
-                {
-                    Text += Localizer.Format("#LOC_xSci_198") + (Body.CelestialBody.atmosphereDepth / 1000) + Localizer.Format("#LOC_xSci_197");
-                    Text += Localizer.Format("#LOC_xSci_199") + (Body.CelestialBody.scienceValues.flyingAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_197");
-                    if (Body.HasOxygen)
-                        Text += Localizer.Format("#LOC_xSci_200");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_201");
-
-                if (Body.HasSurface)
-                {
-                    if (Body.HasOcean)
-                        Text += Localizer.Format("#LOC_xSci_202");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_203");
+                Title = Body.BasicInfo();
+                Text  = Body.ScienceInfo();
             }
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
