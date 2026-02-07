@@ -303,7 +303,8 @@ namespace ScienceChecklist
         #region NO_LOCALIZATION
         public override string ToString()
         {
-            return string.Format("{0}: {1} / {2}", name, s(current), s(max));
+            string displayName = Localizer.Format(def.displayName);
+            return string.Format("{0}: {1} / {2}", displayName, s(current), s(max));
         }
         #endregion
 
