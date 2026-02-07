@@ -1,4 +1,5 @@
-﻿
+﻿using KSP.Localization;
+
 namespace ScienceChecklist {
 	/// <summary>
 	/// An object that represents a ScienceExperiement in a given Situation.
@@ -92,17 +93,29 @@ namespace ScienceChecklist {
 
         #region NO_LOCALIZATION
         /// <summary>
+        /// Special science experiment: Crew Report
+        /// </summary>
+        public bool isCrewReport { get { return ScienceExperiment.id == "crewReport"; } }
+
+        /// <summary>
+        /// Special science experiment: EVA report
+        /// </summary>
+        public bool isEvaReport { get { return ScienceExperiment.id == "evaReport"; } }
+
+        /// <summary>
+        /// Special science experiment: Surface Sample
+        /// </summary>
+        public bool isSurfaceSample { get { return ScienceExperiment.id == "surfaceSample"; } }
+        #endregion
+
+		/// <summary>
         /// Gets the human-readable description of this experiment.
         /// </summary>
         public string Description {
 			get {
-				return string.Format(
-					"{0} while {1}",
-					ScienceExperiment.experimentTitle,
-					Situation.Description);
+				return Localizer.Format("#LOC_xSci_309", ScienceExperiment.experimentTitle, Situation.Description);
 			}
 		}
-        #endregion
 
         public string ShortDescription { get { return ScienceExperiment.experimentTitle; } }
 

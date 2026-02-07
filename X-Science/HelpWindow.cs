@@ -60,60 +60,84 @@ namespace ScienceChecklist
 			ConfigureStyles( );
 		}
 
+		private void GUI_AddSection( string title, int spacing )
+		{
+			GUILayout.Space( wScale( spacing ) );
+			GUILayout.Label( title, sectionStyle, GUILayout.ExpandWidth( true ) );
+		}
 
+		private void GUI_AddParagraph( string text )
+		{
+			GUILayout.Label( text, labelStyle, GUILayout.ExpandWidth( true ) );
+		}
+
+		private void GUI_AddListItem( string text )
+		{
+			GUILayout.BeginHorizontal( labelStyle, GUILayout.ExpandWidth( true ) );
+			GUILayout.Label( "*", labelStyle, GUILayout.ExpandWidth( false ) );
+			GUILayout.Label( text, labelStyle, GUILayout.ExpandWidth( true ) );
+			GUILayout.EndHorizontal();
+		}
 
 		protected override void DrawWindowContents( int windowID )
 		{
 			scrollPosition = GUILayout.BeginScrollView( scrollPosition );
 			GUILayout.BeginVertical( GUILayout.ExpandWidth( true ) );
 
+			// "[x] Science! by Z-Key Aerospace and Bodrick."
 			GUILayout.Label( Localizer.Format("#LOC_xSci_35"), sectionStyle, GUILayout.ExpandWidth( true ) );
 
-			GUILayout.Space( wScale( 30 ) );
-			GUILayout.Label(Localizer.Format("#LOC_xSci_36"), sectionStyle, GUILayout.ExpandWidth(true));
-			GUILayout.Label( Localizer.Format("#LOC_xSci_37"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "About"
+			GUI_AddSection(Localizer.Format("#LOC_xSci_36"), 30);
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_37") );
 
-			GUILayout.Space( wScale( 20 ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_38"), sectionStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_39"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_40"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_41"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_42"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "The filter buttons at the bottom of the window are ..."
+			GUI_AddSection( Localizer.Format("#LOC_xSci_38a"), 20 );
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_38b") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_39") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_40") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_40a") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_41") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_42") );
 
-			GUILayout.Space( wScale( 20 ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_43"), sectionStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_44"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_45"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_46"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_47"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_48"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "The text filter ..."
+			GUI_AddSection( Localizer.Format("#LOC_xSci_43"), 20 );
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_44") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_45") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_46") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_47") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_48") );
 
-			GUILayout.Space( wScale( 20 ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_49"), sectionStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_50"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_51"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_52"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_53"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_54"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_55"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_56"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_57"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_58"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "The settings are ..."
+			GUI_AddSection( Localizer.Format("#LOC_xSci_49a"), 20);
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_49b") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_50") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_51") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_52") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_53") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_54") );
+			#if false
+			// Help for "Use blizzy78's toolbar" (code is disabled)
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_55") );
+			#endif
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_56") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_57") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_58") );
 
-			GUILayout.Space( wScale( 20 ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_59"), sectionStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_60"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_61"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_62"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_63"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "Here and Now Window ..."
+			GUI_AddSection( Localizer.Format("#LOC_xSci_59"), 20);
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_60") );
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_61") );
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_62") );
+			GUI_AddParagraph( Localizer.Format("#LOC_xSci_63") );
 
-			GUILayout.Space( wScale( 20 ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_64"), sectionStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_65"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_66"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_67"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_68"), labelStyle, GUILayout.ExpandWidth( true ) );
-			GUILayout.Label( Localizer.Format("#LOC_xSci_69"), labelStyle, GUILayout.ExpandWidth( true ) );
+			// "Did you know? (includes spoilers) ..."
+			GUI_AddSection( Localizer.Format("#LOC_xSci_64"), 20);
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_65") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_66") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_67") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_68") );
+			GUI_AddListItem( Localizer.Format("#LOC_xSci_69") );
 
 			GUILayout.EndVertical( );
 			GUILayout.EndScrollView( );

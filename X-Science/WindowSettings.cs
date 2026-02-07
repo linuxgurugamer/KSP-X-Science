@@ -9,6 +9,7 @@ namespace ScienceChecklist
 {
 	public sealed class WindowSettings
 	{
+		#region NO_LOCALIZATION
 		public string _windowName;
 		public GameScenes _scene;
 		public Dictionary<string, string> _settings;
@@ -38,7 +39,7 @@ namespace ScienceChecklist
 		}
 		public void Set( string Name, int Value )
 		{
-			_settings[ Name ] = Value.ToString( Localizer.Format("#LOC_xSci_247") );
+			_settings[ Name ] = Value.ToString("D");
 		}
 		public void Set( string Name, bool Value )
 		{
@@ -91,27 +92,28 @@ namespace ScienceChecklist
 
 		public void TestPosition( )
 		{
-			if( Exists( Localizer.Format("#LOC_xSci_135") ) && Exists( Localizer.Format("#LOC_xSci_136") ) )
+			if( Exists( "Top" ) && Exists( "Left" ) )
 			{
-				int Top = GetInt( Localizer.Format("#LOC_xSci_135"), 0 );
-				int Left = GetInt( Localizer.Format("#LOC_xSci_136"), 0 );
+				int Top = GetInt( "Top", 0 );
+				int Left = GetInt( "Left", 0 );
 
 				if( Top > ( Screen.height - 50 ) )
-					Set( Localizer.Format("#LOC_xSci_135"), Screen.height - 50 );
+					Set( "Top", Screen.height - 50 );
 				if( Left > ( Screen.width - 50 ) )
-					Set( Localizer.Format("#LOC_xSci_136"), Screen.width - 50 );
+					Set( "Left", Screen.width - 50 );
 			}
 
-			if( Exists( Localizer.Format("#LOC_xSci_137") ) && Exists( Localizer.Format("#LOC_xSci_138") ) )
+			if( Exists( "CompactTop" ) && Exists( "CompactLeft" ) )
 			{
-				int CompactTop = GetInt( Localizer.Format("#LOC_xSci_137"), 0 );
-				int CompactLeft = GetInt( Localizer.Format("#LOC_xSci_138"), 0 );
+				int CompactTop = GetInt( "CompactTop", 0 );
+				int CompactLeft = GetInt( "CompactLeft", 0 );
 
 				if( CompactTop > ( Screen.height - 50 ) )
-					Set( Localizer.Format("#LOC_xSci_137"), Screen.height - 50 );
+					Set( "CompactTop", Screen.height - 50 );
 				if( CompactLeft > ( Screen.width - 50 ) )
-					Set( Localizer.Format("#LOC_xSci_138"), Screen.width - 50 );
+					Set( "CompactLeft", Screen.width - 50 );
 			}
 		}
+		#endregion
 	}
 }

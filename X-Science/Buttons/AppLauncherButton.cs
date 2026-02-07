@@ -1,4 +1,3 @@
-using KSP.Localization;
 using System;
 using UnityEngine;
 using KSP.UI.Screens;
@@ -13,6 +12,7 @@ namespace ScienceChecklist
 	/// </summary>
 	public sealed class AppLauncherButton : IToolbarButton
 	{
+		#region NO_LOCALIZATION
 		public Texture2D						_Texture;
 		public ApplicationLauncher.AppScenes	_Visibility;
 
@@ -49,7 +49,7 @@ namespace ScienceChecklist
 		{
 //			_logger.Trace("Add");
 			if (_button != null) {
-				_logger.Debug(Localizer.Format("#LOC_xSci_248"));
+				_logger.Debug("Button already added");
 				return;
 			}
 
@@ -76,7 +76,7 @@ namespace ScienceChecklist
 		public void Remove () {
 //			_logger.Trace("Remove");
 			if (_button == null) {
-				_logger.Debug(Localizer.Format("#LOC_xSci_249"));
+				_logger.Debug("Button already removed");
 				return;
 			}
 
@@ -180,7 +180,7 @@ namespace ScienceChecklist
 		private ApplicationLauncherButton _button;
 		private readonly Logger _logger;
 
-
+		#endregion
 	}
 }
 

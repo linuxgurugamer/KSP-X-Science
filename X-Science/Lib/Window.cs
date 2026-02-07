@@ -83,11 +83,16 @@ namespace ScienceChecklist
 			mouseDown = false;
 			visible = false;
 
-			var texture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_284"), 16, 16 );
-			resizeContent = (texture != null) ? new GUIContent(texture, Localizer.Format("#LOC_xSci_285")) : new GUIContent(Localizer.Format("#LOC_xSci_286"), Localizer.Format("#LOC_xSci_285"));
-
-			var closetexture = TextureHelper.FromResource( Localizer.Format("#LOC_xSci_130"), 16, 16 );
-			closeContent = ( closetexture != null ) ? new GUIContent( closetexture, Localizer.Format("#LOC_xSci_153") ) : new GUIContent( Localizer.Format("#LOC_xSci_154"), Localizer.Format("#LOC_xSci_153") );
+			#region NO_LOCALIZATION
+			var texture = TextureHelper.FromResource("ScienceChecklist.icons.resize.png", 16, 16 );
+			resizeContent = (texture == null) ?
+				new GUIContent("R", Localizer.Format("#LOC_xSci_285")) :
+				new GUIContent(texture, Localizer.Format("#LOC_xSci_285"));
+			var closetexture = TextureHelper.FromResource("ScienceChecklist.icons.close.png", 16, 16 );
+			closeContent  = (closetexture == null) ?
+				new GUIContent("X", Localizer.Format("#LOC_xSci_153")) :
+				new GUIContent(closetexture, Localizer.Format("#LOC_xSci_153"));
+			#endregion
 		}
 
 		public bool IsVisible()

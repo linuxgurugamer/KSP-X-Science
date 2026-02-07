@@ -313,9 +313,9 @@ namespace ScienceChecklist {
 				.Select(x => x.experimentID)
 				.Distinct();
 			return src.Where( x => x.IsUnlocked ).Where(x =>
-				(x.ScienceExperiment.id != Localizer.Format("#LOC_xSci_32") && experiments.Contains(x.ScienceExperiment.id)) || // unmanned - crewReport needs to be explicitly ignored as we need crew for that experiment even though it's a module on the capsules.
-				(hasCrew && experiments.Contains(Localizer.Format("#LOC_xSci_32")) && x.ScienceExperiment.id == Localizer.Format("#LOC_xSci_32")) || // manned crewReport
-				(hasCrew && (x.ScienceExperiment.id == Localizer.Format("#LOC_xSci_33") || x.ScienceExperiment.id == Localizer.Format("#LOC_xSci_7")))); // manned
+				(!(x.isCrewReport) && experiments.Contains(x.ScienceExperiment.id)) || // unmanned - crewReport needs to be explicitly ignored as we need crew for that experiment even though it's a module on the capsules.
+				(hasCrew && x.isCrewReport && experiments.Contains(x.ScienceExperiment.id)) || // manned crewReport
+				(hasCrew && (x.isSurfaceSample || x.isEvaReport))); // manned, requires EVA first
 		}
 
 

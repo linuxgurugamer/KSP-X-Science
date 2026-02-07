@@ -95,31 +95,8 @@ namespace ScienceChecklist
             if (SelectedObject.celestialBody)
             {
                 Body Body = _parent.Science.BodyList[SelectedObject.celestialBody];
-                Title += Localizer.Format("#LOC_xSci_194") + GameHelper.LocalizeBodyName(Body.CelestialBody.displayName) + "\n";
-                Title += Body.Type;
-                if (Body.IsHome)
-                    Title += Localizer.Format("#LOC_xSci_195");
-
-
-
-                Text += Localizer.Format("#LOC_xSci_196") + (Body.CelestialBody.scienceValues.spaceAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_197");
-                if (Body.HasAtmosphere)
-                {
-                    Text += Localizer.Format("#LOC_xSci_198") + (Body.CelestialBody.atmosphereDepth / 1000) + Localizer.Format("#LOC_xSci_197");
-                    Text += Localizer.Format("#LOC_xSci_199") + (Body.CelestialBody.scienceValues.flyingAltitudeThreshold / 1000) + Localizer.Format("#LOC_xSci_197");
-                    if (Body.HasOxygen)
-                        Text += Localizer.Format("#LOC_xSci_200");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_201");
-
-                if (Body.HasSurface)
-                {
-                    if (Body.HasOcean)
-                        Text += Localizer.Format("#LOC_xSci_202");
-                }
-                else
-                    Text += Localizer.Format("#LOC_xSci_203");
+                Title = Body.BasicInfo();
+                Text  = Body.ScienceInfo();
             }
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
@@ -180,14 +157,8 @@ namespace ScienceChecklist
                         var crew = proto.GetVesselCrew().Count();
                         mass += res.Values.Sum(d => d.GetMass());
                         var parts = proto.protoPartSnapshots.Count();
+                        texts.Add(Localizer.Format("#LOC_xSci_205", crew, parts, string.Format("{0:f2}",mass)));
 
-                        // This is done because the Localizer.Format is unable to deal with embedded braces
-                        string formatStr = Localizer.Format("#LOC_xSci_205a") + " {0}, " +
-                                            Localizer.Format("#LOC_xSci_205b") + " {1}, " +
-                                            Localizer.Format("#LOC_xSci_205c") + " {2:f2}t";
-
-                        texts.Add(string.Format(formatStr, crew, parts, mass));
-                        //  Crew: {0}, Parts: {1}, Mass: {2:f2}t
 
 
                         switch (this.status)
@@ -229,6 +200,7 @@ namespace ScienceChecklist
         }
 
 
+        #region NO_LOCALIZATION
         public void CheckCommand(ProtoPartSnapshot part)
         {
             if (status == Statuses.pod)
@@ -236,12 +208,12 @@ namespace ScienceChecklist
 
             foreach (var m in part.modules)
             {
-                if (m.moduleName == Localizer.Format("#LOC_xSci_208"))
+                if (m.moduleName == "ModuleCommand")
                 {
                     status = Statuses.pod;
                     return;
                 }
-                if (m.moduleName == Localizer.Format("#LOC_xSci_209"))
+                if (m.moduleName == "KerbalSeat")
                 {
                     status = Statuses.seat;
                 }
@@ -282,10 +254,10 @@ namespace ScienceChecklist
         {
             //_logger.Info( "BuildSettings" );
             WindowSettings W = new WindowSettings(ScienceChecklistAddon.WINDOW_NAME_SHIP_STATE);
-            W.Set(Localizer.Format("#LOC_xSci_135"), (int)windowPos.yMin);
-            W.Set(Localizer.Format("#LOC_xSci_136"), (int)windowPos.xMin);
-            W.Set(Localizer.Format("#LOC_xSci_210"), (int)windowPos.width);
-            W.Set(Localizer.Format("#LOC_xSci_211"), (int)windowPos.height);
+            W.Set("Top", (int)windowPos.yMin);
+            W.Set("Left", (int)windowPos.xMin);
+            W.Set("Width", (int)windowPos.width);
+            W.Set("Height", (int)windowPos.height);
 
             return W;
         }
@@ -294,18 +266,18 @@ namespace ScienceChecklist
 
         public void ApplySettings(WindowSettings W)
         {
-            windowPos.yMin = W.GetInt(Localizer.Format("#LOC_xSci_135"), 40);
-            windowPos.xMin = W.GetInt(Localizer.Format("#LOC_xSci_136"), 40);
-            windowPos.width = W.GetInt(Localizer.Format("#LOC_xSci_210"), 200);
-            windowPos.height = W.GetInt(Localizer.Format("#LOC_xSci_211"), 200);
+            windowPos.yMin = W.GetInt("Top", 40);
+            windowPos.xMin = W.GetInt("Left", 40);
+            windowPos.width = W.GetInt("Width", 200);
+            windowPos.height = W.GetInt("Height", 200);
 
             if (windowPos.width < 100)
                 windowPos.width = 100;
 
             if (windowPos.width < 50)
                 windowPos.width = 50;
-
         }
+        #endregion
     }
 
 
@@ -331,7 +303,8 @@ namespace ScienceChecklist
         #region NO_LOCALIZATION
         public override string ToString()
         {
-            return string.Format("{0}: {1} / {2}", name, s(current), s(max));
+            string displayName = Localizer.Format(def.displayName);
+            return string.Format("{0}: {1} / {2}", displayName, s(current), s(max));
         }
         #endregion
 

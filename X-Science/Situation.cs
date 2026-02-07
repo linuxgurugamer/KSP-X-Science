@@ -25,14 +25,11 @@ namespace ScienceChecklist {
 			_subBiome = subBiome;
 			_formattedBiome = BiomeToString(body.CelestialBody, _biome);
 			_formattedSubBiome = BiomeToString(body.CelestialBody, _subBiome);
-			_description = string.Format("{0} {1}{2}",
+			_description = FormatDescription(
 				ToString(_situation),
-				GameHelper.LocalizeBodyName( Body.CelestialBody.displayName ),
-				string.IsNullOrEmpty(_formattedBiome)
-					? string.Empty
-					: string.IsNullOrEmpty(_formattedSubBiome)
-						? string.Format("'s {0}", _formattedBiome)
-						: string.Format("'s {0} ({1})", _formattedSubBiome, _formattedBiome));
+				body.CelestialBody.displayName,
+				_formattedBiome,
+				_formattedSubBiome);
 		}
 
         #endregion
@@ -122,6 +119,15 @@ namespace ScienceChecklist {
 				stringBiome = ScienceUtil.GetBiomedisplayName(body, stringBiome);
 			}
 			return stringBiome;
+		}
+
+		private string FormatDescription(string situation, string body, string biome, string subbiome)
+		{
+			if (string.IsNullOrEmpty(biome))
+				return Localizer.Format("#LOC_xSci_306", situation, body);
+			if (string.IsNullOrEmpty(subbiome))
+				return Localizer.Format("#LOC_xSci_307", situation, body, biome);
+			return Localizer.Format("#LOC_xSci_308", situation, body, biome, subbiome);
 		}
 
 		internal readonly Body				  _body;

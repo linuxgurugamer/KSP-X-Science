@@ -18,7 +18,7 @@ namespace ScienceChecklist
 		}
 
 
-
+		#region NO_LOCALIZATION
 		public void Clear( )
 		{
 // var _logger = new Logger( "UnlockedInstrumentList" );
@@ -34,14 +34,14 @@ float AstroLevel = ScenarioUpgradeableFacilities.GetFacilityLevel( SpaceCenterFa
 
 
 
-			_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_32"), true );
-			_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_7"), true );
+			_unlockedInstruments.Add("crewReport", true );
+			_unlockedInstruments.Add("evaReport", true );
 			if( RnDLevel >= 0.5 )
-				_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_33"), true );
+				_unlockedInstruments.Add( Localizer.Format("surfaceSample"), true );
 			else
-				_unlockedInstruments.Add( Localizer.Format("#LOC_xSci_33"), false );
+				_unlockedInstruments.Add( Localizer.Format("surfaceSample"), false );
 		}
-
+		#endregion
 
 
 		public bool IsUnlocked( string Id )

@@ -10,6 +10,7 @@ namespace ScienceChecklist
     [KSPAddon(KSPAddon.Startup.MainMenu, true)]
     public class RegisterToolbar : MonoBehaviour
     {
+        #region NO_LOCALIZATION
 #if false
         static public Log Log;
 #endif
@@ -20,11 +21,12 @@ namespace ScienceChecklist
 
 #if false
 #if DEBUG
-            Log = new Log(Localizer.Format("#LOC_xSci_75"), Log.LEVEL.INFO);
+            Log = new Log("XScience", Log.LEVEL.INFO);
 #else
-            Log = new Log(Localizer.Format("#LOC_xSci_75"), Log.LEVEL.Error);
+            Log = new Log("XScience", Log.LEVEL.Error);
 #endif
 #endif
         }
+        #endregion
     }
 }

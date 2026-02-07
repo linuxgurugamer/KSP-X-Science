@@ -9,11 +9,12 @@ namespace ScienceChecklist
 {
     public sealed class Config
     {
+        #region NO_LOCALIZATION
         // Locals
         private readonly Logger _logger;
         //private readonly string _assemblyPath = Path.GetDirectoryName(typeof(ScienceChecklistAddon).Assembly.Location);
         private readonly string _file = "/GameData/[x]_Science!/PluginData/settings.cfg";
-        private string SettingsFile {  get { var s = KSPUtil.ApplicationRootPath + _file; _logger.Info(Localizer.Format("#LOC_xSci_10") + s); return s; } }
+        private string SettingsFile {  get { var s = KSPUtil.ApplicationRootPath + _file; _logger.Info("SettingsFile: " + s); return s; } }
         private Dictionary<GameScenes, Dictionary<string, WindowSettings>> _windowSettings = new Dictionary<GameScenes, Dictionary<string, WindowSettings>>();
 
         private bool _simpleMode;
@@ -337,7 +338,7 @@ namespace ScienceChecklist
 
 
 
-            _logger.Trace( Localizer.Format("#LOC_xSci_11") + SettingsFile);
+            _logger.Trace( "Saving to " + SettingsFile);
             node.Save(SettingsFile);
         }
 
@@ -370,7 +371,7 @@ namespace ScienceChecklist
 
             try
             {
-                _logger.Trace(Localizer.Format("#LOC_xSci_12") + SettingsFile);
+                _logger.Trace("Loading from " + SettingsFile);
                 if (File.Exists(SettingsFile))
                 {
                     var node = ConfigNode.Load(SettingsFile);
@@ -501,9 +502,9 @@ namespace ScienceChecklist
             }
             catch (Exception e)
             {
-                _logger.Info(Localizer.Format("#LOC_xSci_13") + e.ToString());
+                _logger.Info("Unable to load config: " + e.ToString());
             }
         }
-
+        #endregion
     }
 }

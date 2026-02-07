@@ -33,11 +33,12 @@ namespace ScienceChecklist
 			_isInstalled = false;
 
 
-
-			_tDMAPI =							getType( Localizer.Format("#LOC_xSci_14") );
-			_tDMModuleScienceAnimate =			getType( Localizer.Format("#LOC_xSci_15") );
-			_tDMModuleScienceAnimateGeneric =	getType( Localizer.Format("#LOC_xSci_16") );
-			_tDMBasicScienceModule =			getType( Localizer.Format("#LOC_xSci_17") );
+			#region NO_LOCALIZATION
+			_tDMAPI =                         getType( "DMagic.DMAPI" );
+			_tDMModuleScienceAnimate =        getType( "DMagic.Part_Modules.DMModuleScienceAnimate" );
+			_tDMModuleScienceAnimateGeneric = getType( "DMModuleScienceAnimateGeneric.DMModuleScienceAnimateGeneric" );
+			_tDMBasicScienceModule =          getType( "DMagic.Part_Modules.DMBasicScienceModule" );
+			#endregion
 
 
 
@@ -144,6 +145,7 @@ namespace ScienceChecklist
 
 		public DMAPI( Type tDMAPI )
 		{
+			#region NO_LOCALIZATION
 			_logger = new Logger( this );
 
 
@@ -152,44 +154,44 @@ namespace ScienceChecklist
 //			_logger.Trace( "DMagic API found. Validating Methods." );
 			ParameterInfo[] p;
 
-			_MIexperimentCanConduct = tDMAPI.GetMethod( Localizer.Format("#LOC_xSci_18"), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy );
+			_MIexperimentCanConduct = tDMAPI.GetMethod("experimentCanConduct", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy );
 			p = _MIexperimentCanConduct.GetParameters();
 			if (!((p.Length == 1) && (p[0].ParameterType == typeof(IScienceDataContainer)) && _MIexperimentCanConduct.ReturnType == typeof(bool)))
 			{
-				_logger.Info( Localizer.Format("#LOC_xSci_19") );
+				_logger.Info("DMAPI.experimentCanConduct method signature has changed. [x] Science may not work for DMagic experiments");
 				_MIexperimentCanConduct = null;
 			}
 
 
 
-			_MIdeployDMExperiment = tDMAPI.GetMethod(Localizer.Format("#LOC_xSci_20"), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+			_MIdeployDMExperiment = tDMAPI.GetMethod("deployDMExperiment", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
 			p = _MIdeployDMExperiment.GetParameters();
 			if (!((p.Length == 2) && (p[0].ParameterType == typeof(IScienceDataContainer)) && (p[1].ParameterType == typeof(bool)) && _MIdeployDMExperiment.ReturnType == typeof(bool)))
 			{
-				_logger.Info( Localizer.Format("#LOC_xSci_21") );
+				_logger.Info("DMAPI.deployDMExperiment method signature has changed. [x] Science may not work for DMagic experiments");
 				_MIdeployDMExperiment = null;
 			}
 
 
 
-			_MIgetExperimentSituation = tDMAPI.GetMethod(Localizer.Format("#LOC_xSci_22"), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+			_MIgetExperimentSituation = tDMAPI.GetMethod("getExperimentSituation", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
 			p = _MIgetExperimentSituation.GetParameters();
 			if (!((p.Length == 1) && (p[0].ParameterType == typeof(ModuleScienceExperiment)) && _MIgetExperimentSituation.ReturnType == typeof(ExperimentSituations)))
 			{
-				_logger.Info( Localizer.Format("#LOC_xSci_23") );
+				_logger.Info("DMAPI.getExperimentSituation method signature has changed. [x] Science may not work for DMagic experiments");
 				_MIgetExperimentSituation = null;
 			}
 
 
 
-			_MIgetBiome = tDMAPI.GetMethod(Localizer.Format("#LOC_xSci_24"), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+			_MIgetBiome = tDMAPI.GetMethod("getBiome", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
 			p = _MIgetBiome.GetParameters();
 			if (!((p.Length == 2) && (p[0].ParameterType == typeof(ModuleScienceExperiment)) && (p[1].ParameterType == typeof(ExperimentSituations)) && _MIgetBiome.ReturnType == typeof(string)))
 			{
-				_logger.Info( Localizer.Format("#LOC_xSci_25") );
+				_logger.Info("DMAPI.getBiome method signature has changed. [x] Science may not work for DMagic experiments");
 				_MIgetBiome = null;
 			}
-
+			#endregion
 		}
 
 
@@ -245,6 +247,7 @@ namespace ScienceChecklist
 
 		public DMModuleScienceAnimateGeneric( Type tDMModuleScienceAnimateGeneric )
 		{
+			#region NO_LOCALIZATION
 			_logger = new Logger( this );
 			_tDMModuleScienceAnimateGeneric = tDMModuleScienceAnimateGeneric;
 
@@ -255,38 +258,39 @@ namespace ScienceChecklist
 //				_logger.Trace( "DMModuleScienceAnimateGeneric found. Validating Methods." );
 				ParameterInfo[] p;
 
-				_MIcanConduct = _tDMModuleScienceAnimateGeneric.GetMethod(Localizer.Format("#LOC_xSci_26"), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+				_MIcanConduct = _tDMModuleScienceAnimateGeneric.GetMethod("canConduct", BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 				p = _MIcanConduct.GetParameters();
 				if (!((p.Length == 0) && _MIcanConduct.ReturnType == typeof(bool)))
 				{
-					_logger.Info( Localizer.Format("#LOC_xSci_27") );
+					_logger.Info("DMModuleScienceAnimateGeneric.canConduct method signature has changed. [x] Science may not work for DMModuleScienceAnimateGeneric experiments");
 					_MIcanConduct = null;
 				}
 
-				_MIgatherScienceData = _tDMModuleScienceAnimateGeneric.GetMethod(Localizer.Format("#LOC_xSci_28"), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+				_MIgatherScienceData = _tDMModuleScienceAnimateGeneric.GetMethod("gatherScienceData", BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 				p = _MIgatherScienceData.GetParameters();
 				if (!((p.Length == 1) && (p[0].ParameterType == typeof(bool)) && _MIgatherScienceData.ReturnType == typeof(void)))
 				{
-					_logger.Info( Localizer.Format("#LOC_xSci_29") );
+					_logger.Info("DMModuleScienceAnimateGeneric.gatherScienceData method signature has changed. [x] Science may not work for DMModuleScienceAnimateGeneric experiments");
 					_MIgatherScienceData = null;
 				}
 
-				_MIgetSituation = _tDMModuleScienceAnimateGeneric.GetMethod(Localizer.Format("#LOC_xSci_30"), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+				_MIgetSituation = _tDMModuleScienceAnimateGeneric.GetMethod("getSituation", BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 				p = _MIgetSituation.GetParameters();
 				if (!((p.Length == 0) && _MIgetSituation.ReturnType == typeof(ExperimentSituations)))
 				{
-					_logger.Info( Localizer.Format("#LOC_xSci_31") );
+					_logger.Info("DMModuleScienceAnimateGeneric.getSituation method signature has changed. [x] Science may not work for DMModuleScienceAnimateGeneric experiments");
 					_MIgetSituation = null;
 				}
 
-				_MIgetBiome = _tDMModuleScienceAnimateGeneric.GetMethod(Localizer.Format("#LOC_xSci_24"), BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+				_MIgetBiome = _tDMModuleScienceAnimateGeneric.GetMethod("getBiome", BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 				p = _MIgetBiome.GetParameters();
 				if (!((p.Length == 1) && (p[0].ParameterType == typeof(ExperimentSituations)) && _MIgetBiome.ReturnType == typeof(string)))
 				{
-					_logger.Info( Localizer.Format("#LOC_xSci_31") );
+					_logger.Info("DMModuleScienceAnimateGeneric.getBiome method signature has changed. [x] Science may not work for DMModuleScienceAnimateGeneric experiments");
 					_MIgetBiome = null;
 				}
 			}
+			#endregion
 		}
 
 
