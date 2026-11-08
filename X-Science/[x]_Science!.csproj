@@ -117,6 +117,7 @@
     <Compile Include="Situation.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimeForScienceBridge.cs" />
     <Compile Include="StatusWindow.cs">
       <SubType>Code</SubType>
     </Compile>

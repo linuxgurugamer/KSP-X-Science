@@ -395,7 +395,7 @@ namespace ScienceChecklist
             #region NO_LOCALIZATION
             string scienceValueString = " (" + exp.NextScienceIncome.ToString(
                 ScienceChecklistAddon.Config.VeryLowMinScience && exp.NextScienceIncome < 1 ? "F3" : "F1"
-                ) + ")";
+                ) + (exp.NextRunDuration != null ? ", " + exp.NextRunDuration : "") + ")";
             if(!ScienceChecklistAddon.Config.SimpleMode) scienceValueString += "\n" + (exp.CompletedScience + exp.OnboardScience).ToString("F2");
             #endregion
             GUIContent expContent = new GUIContent(exp.ShortDescription + scienceValueString,

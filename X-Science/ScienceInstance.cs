@@ -85,6 +85,11 @@ namespace ScienceChecklist {
 		/// </summary>
 		public float NextScienceIncome = 0f;
 
+		/// <summary>
+		/// Duration of the next run with TimeForScience installed (e.g. "1m 39s"), or null if instantaneous.
+		/// </summary>
+		public string NextRunDuration = null;
+
         /// <summary>
         /// Gets the ScienceSubject containing information on how much science has been retrieved from this experiment.
         /// </summary>

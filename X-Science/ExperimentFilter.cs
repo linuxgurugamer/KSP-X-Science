@@ -158,6 +158,7 @@ namespace ScienceChecklist {
             foreach (var x in scienceList)
             {
                 x.NextScienceIncome = GetNextExperimentScience(x, onboardData);
+                x.NextRunDuration = TimeForScienceBridge.GetDurationText(x);
             }
 
             scienceList = scienceList.OrderBy( x => x.TotalScience ).ToArray();
