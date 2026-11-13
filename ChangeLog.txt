@@ -99,3 +99,7 @@ ChangeLog
 
 6.0.3.1
 	Fixed localization error where format strings were put into the localization string; the Localizer.Format can't deal with that 
+
+6.0.4
+	Thanks to github user @Rjoande for this:
+			Show TimeForScience experiment durations in the Here and Now window
