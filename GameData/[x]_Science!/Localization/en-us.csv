@@ -172,7 +172,7 @@
 "LOC_xSci_171","Hide Min Science Slider"
 "LOC_xSci_172","Hide the minimum science slider in the Here & Now window"
 "LOC_xSci_173","Low Min Science"
-"LOC_xSci_174","Minimum science slider in the Here & Now window will go fom 0.0001 to 0.1"
+"LOC_xSci_174","Minimum science slider in the Here & Now window will go from 0.0001 to 0.1"
 "LOC_xSci_175","Allow all filter"
 "LOC_xSci_176","Adds a filter button showing all experiments, even on unexplored bodies using unavailable instruments.\nMight be considered cheating."
 "LOC_xSci_177","Filter difficult science"
